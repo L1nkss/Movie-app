@@ -1,0 +1,112 @@
+// Цвета
+$main-color: #262626;
+$secondary-color: #ECDFBD;
+
+html {
+    box-sizing: border-box;
+  }
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+
+// Общие стили
+ul {
+    padding: 0;
+    list-style: none;
+}
+
+body {
+    background-color: $main-color;
+    margin: 0;
+    padding: 0;
+    color: $secondary-color;
+}
+
+.app {
+    display: flex;
+}
+
+// Боковое меню
+.side-menu {
+    border-right: 1px solid white;
+    padding: 20px
+}
+
+.header {
+    display: flex;
+    align-items: center;
+
+    .search-form {
+        margin-left: auto;
+    }
+}
+
+.main {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+.search-form {
+    background-color: white;
+    padding: 8px;
+    border-radius: 8px;
+
+    &__icon {
+        margin-right: 6px;
+    }
+
+    &__input {
+        border: none;
+
+        &:focus {
+            outline: none;
+        }
+    }
+}
+
+.film-list {
+    display: flex;
+
+    a {
+        flex: 1 1 0;
+    }
+}
+
+// Менюшки
+.menu-list__item {
+    padding: 8px;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    &--active {
+        border-right: 1px solid $secondary-color;
+    }
+
+    &-icon {
+        margin-right: 8px;
+    }
+}
+// .light-block {
+//     padding: 6px;
+//     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
+
+//     &--upper-radius {
+//         border-top-left-radius: 6px;
+//         border-top-right-radius: 6px;
+//     }
+// }
+
+// .menu {
+//     display: flex;
+// }
+
+// .app {
+//     max-width: 800px;
+//     margin: 0 auto;
+// }
