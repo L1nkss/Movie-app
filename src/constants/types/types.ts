@@ -2,7 +2,8 @@ type TFilmNavigation = {
   name: string,
   label: string,
   icon: string,
-  isActive: boolean
+  isActive: boolean,
+  id?: number
 };
 
 export { TFilmNavigation };

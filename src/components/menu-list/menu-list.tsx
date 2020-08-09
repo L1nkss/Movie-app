@@ -9,7 +9,8 @@ const MenuList: React.FC<IMenuListProps> = (props: IMenuListProps): JSX.Element 
   return (
     <ul className="menu-list">
       {props.items.map((item) => {
-        return <MenuListItem key={item.label} item={item} />;
+        console.log(item);
+        return <MenuListItem key={item.id ? item.id : item.label} item={item} />;
       })}
     </ul>
   );

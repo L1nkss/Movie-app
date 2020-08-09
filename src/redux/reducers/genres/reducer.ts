@@ -17,7 +17,6 @@ const reducer = (state = initialState, action: any) => {
       return { ...state, loading: true };
 
     case ActionType.GET_GENRES_SUCCESS:
-      console.log(action.payload);
       return { ...state, loading: false, genres: action.payload };
 
     case ActionType.GET_GENRES_ERROR:
