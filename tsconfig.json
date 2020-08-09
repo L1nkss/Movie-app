@@ -2,7 +2,7 @@
     "compilerOptions": {
         "outDir": "./public",
         "noImplicitAny": true,
-        "module": "es6",
+        "module": "commonjs",
         "target": "es5",
         "jsx": "react",
         "allowJs": true,
@@ -10,7 +10,9 @@
         "esModuleInterop": true,
         "baseUrl": "./",
         "paths": {
-            "@components/*": ["src/components/*"]
+            "@components/*": ["src/components/*"],
+            "@constants/*": ["src/constants/*"],
+            "@redux/*": ["src/redux/*"]
         }
     },
     "exclude": [

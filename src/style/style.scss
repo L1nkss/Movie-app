@@ -1,6 +1,7 @@
 // Цвета
 $main-color: #262626;
 $secondary-color: #ECDFBD;
+$orange: orange;
 
 html {
     box-sizing: border-box;
@@ -12,6 +13,10 @@ html {
   box-sizing: inherit;
 }
 
+a {
+    color: inherit;
+    text-decoration: none;
+}
 
 // Общие стили
 ul {
@@ -69,10 +74,30 @@ body {
 }
 
 .film-list {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 320px));
+    grid-column-gap: 24px;
+    grid-row-gap: 18px;
+    padding: 26px 0;
+}
 
-    a {
-        flex: 1 1 0;
+.film-card {
+    border-radius: 8px;
+    overflow: hidden;
+    transition: .7s;
+
+    &:hover {
+        transition: .7s;
+        background-color: lighten($main-color, 10);
+        box-shadow: 0px 2px 23px -4px rgba($main-color , 1);
+    }
+
+    &__image {
+        width: 100%;
+    }
+
+    &__wrapper {
+        text-align: center;
     }
 }
 
@@ -82,31 +107,23 @@ body {
 
     &:hover {
         cursor: pointer;
+
+        .menu-list__item-icon {
+            color: orange
+        }
     }
 
     &--active {
-        border-right: 1px solid $secondary-color;
+        color: orange;
+
+        &:hover {
+            .menu-list__item-icon {
+                color: lighten(orange, 30)
+            }
+        }
     }
 
     &-icon {
         margin-right: 8px;
     }
 }
-// .light-block {
-//     padding: 6px;
-//     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
-
-//     &--upper-radius {
-//         border-top-left-radius: 6px;
-//         border-top-right-radius: 6px;
-//     }
-// }
-
-// .menu {
-//     display: flex;
-// }
-
-// .app {
-//     max-width: 800px;
-//     margin: 0 auto;
-// }
