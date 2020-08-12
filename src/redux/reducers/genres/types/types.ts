@@ -1,23 +1,28 @@
 import { TFilmNavigation } from "@constants/types/types";
+import ActionType from "@redux/reducers/genres/constants/constants";
 
 // Экшен
 export type TGenreRequest = {
-  type: "GET_GENRES_REQUEST"
+  type: typeof ActionType.GET_GENRES_REQUEST,
+  payload?: any
 };
 
 export type TGenreSuccess = {
-  type: "GET_GENRES_SUCCESS", payload: Array<TGenre>
+  type: typeof ActionType.GET_GENRES_SUCCESS,
+  payload: Array<TGenre>
 };
 
 export type TGenreError = {
-  type: "GET_GENRES_ERROR", payload: string
+  type: typeof ActionType.GET_GENRES_ERROR,
+  payload?: any
 };
 
 export type TChangeGenre = {
-  type: "CHANGE_ACTIVE_GENRE", payload: string
+  type: typeof ActionType.CHANGE_ACTIVE_GENRE,
+  payload: string
 };
 
-type GenreAction =
+type GenreActionTypes =
   | TGenreRequest
   | TGenreSuccess
   | TGenreError
@@ -26,9 +31,10 @@ type GenreAction =
 type TGenre = {
   id: number,
   name: string
+  icon: string
 };
 
-interface IInitialState {
+interface IGenreState {
   genres: Array<TGenre> | [],
   filmGenres: Array<TFilmNavigation>,
   active: string,
@@ -36,4 +42,4 @@ interface IInitialState {
   error: boolean
 }
 
-export { IInitialState, GenreAction, TGenre };
+export { IGenreState, GenreActionTypes, TGenre };

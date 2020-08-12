@@ -1,0 +1,7 @@
+const ActionType = {
+  GET_FILMS_REQUEST: "GET_FILMS_REQUEST",
+  GET_FILM_SUCCESS: "GET_FILM_SUCCESS",
+  GET_FILM_ERROR: "GET_FILM_ERROR",
+};
+
+export default ActionType;

@@ -20,14 +20,17 @@ class Api {
     this.token = token;
 
     this.getGenres = this.getGenres.bind(this);
+    this.getFilms = this.getFilms.bind(this);
   }
 
   getGenres() {
     return this.api.get("genre/movie/list", { params: { api_key: this.token } });
   }
-  // getGenres() {
-  //   return this.api.get("/genre/movie/list?api_key=f3dfa7a0f96b31113bbc972260285be3&language=en-US");
-  // }
+
+  getFilms(type: string) {
+    console.log(type);
+    return this.api.get(`movie/${type}`, { params: { api_key: this.token } });
+  }
 }
 
 export default new Api(BASE_URL, key);

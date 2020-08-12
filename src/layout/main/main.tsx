@@ -1,24 +1,31 @@
 import Header from "@components/header/header";
+import { useEffect } from "react";
+import FilmCard from "@components/film-card/film-card";
 
-const Main: React.FC = (): JSX.Element => {
+import Spinner from "@components/spinner/spinner";
+
+const Main: React.FC = (props: any): JSX.Element => {
+  const { loading, error, films } = props;
+  useEffect(() => {
+    props.loadFilms("popular");
+  }, []);
+
+  function createFilmCards(films) {
+    return films.map((film) => {
+      return <FilmCard key={film.id} name={film.title} poster={film.posterPath} />;
+    });
+  }
+
+  const componentToShow = (loading || films.length === 0) ? <Spinner /> : createFilmCards(films);
   return (
     <div className="main">
       <Header />
 
       <div className="film-list">
-        <a href="https://">
-          <div className="film-card">
-            <img className="film-card__image" src="image/mock-image.jpg" alt="Изображение" />
-            <div className="film-card__wrapper">
-              <h4>Название фильма</h4>
-              <p>2016, 109 min</p>
-            </div>
-          </div>
-        </a>
+        {/*{componentToShow}*/}
       </div>
     </div>
   );
 };
 
 export default Main;
-

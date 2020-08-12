@@ -1,8 +1,9 @@
 import { connect } from "react-redux";
+import { IRootState } from "@redux/reducers/types/types";
 import { getGenresRequest } from "@redux/reducers/genres/actions/actions";
 import AsideMenu from "./aside-menu";
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: IRootState) => ({
   isLoading: state.genre.loading,
   isError: state.genre.error,
   genres: state.genre.genres,

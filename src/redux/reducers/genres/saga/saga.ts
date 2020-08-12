@@ -8,7 +8,6 @@ function* genreSaga() {
     const response = yield call(Service.getGenres);
     yield put(getGenresSuccess(response.data.genres));
   } catch (e) {
-    console.log(e);
     yield put(getGenresError());
   }
 }

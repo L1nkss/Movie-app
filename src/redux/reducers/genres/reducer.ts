@@ -1,8 +1,9 @@
-import { IInitialState, GenreAction } from "@redux/reducers/genres/types/types";
+import { IGenreState, GenreActionTypes } from "@redux/reducers/genres/types/types";
 import { FILM_NAVIGATION } from "@constants/contants";
 import ActionType from "@redux/reducers/genres/constants/constants";
+import { Reducer } from "redux";
 
-const initialState: IInitialState = {
+const initialState: IGenreState = {
   genres: [],
   filmGenres: FILM_NAVIGATION,
   active: FILM_NAVIGATION[0].label,
@@ -10,8 +11,7 @@ const initialState: IInitialState = {
   error: false,
 };
 
-// Исправить any TODO
-const reducer = (state = initialState, action: any) => {
+const reducer: Reducer<IGenreState> = (state = initialState, action: GenreActionTypes): IGenreState => {
   switch (action.type) {
     case ActionType.GET_GENRES_REQUEST:
       return { ...state, loading: true };

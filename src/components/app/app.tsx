@@ -1,4 +1,4 @@
-import Main from "../../layout/main/main";
+import Main from "../../layout/main/main.connect";
 import AsideMenu from "../../layout/aside-menu/aside-menu.connect";
 
 const App: React.FC = () => {
