@@ -6,7 +6,7 @@ import { Reducer } from "redux";
 const initialState: IGenreState = {
   genres: [],
   filmGenres: FILM_NAVIGATION,
-  active: FILM_NAVIGATION[0].label,
+  active: FILM_NAVIGATION[2].label,
   loading: false,
   error: false,
 };

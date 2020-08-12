@@ -1,10 +1,10 @@
 import { TFilmNavigation } from "@constants/types/types";
 import ActionType from "@redux/reducers/genres/constants/constants";
 
-// Экшен
+// Экшены
 export type TGenreRequest = {
   type: typeof ActionType.GET_GENRES_REQUEST,
-  payload?: any
+  payload?: void
 };
 
 export type TGenreSuccess = {

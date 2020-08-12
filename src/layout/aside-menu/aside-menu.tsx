@@ -6,10 +6,11 @@ import Spinner from "@components/spinner/spinner";
 
 interface IAsideMenuProps {
   isLoading: boolean,
-  isError: boolean,
   genres: Array<TGenre> | [],
   filmGenres: Array<TFilmNavigation>,
   loadGenres: () => void
+  handleFilmTabClick: (type: string) => void,
+  handleGenreTabClick: (id: number) => void
 }
 
 // Todo испраавить
@@ -22,15 +23,19 @@ const AsideMenu: React.FC<IAsideMenuProps> = (props: IAsideMenuProps): JSX.Eleme
       <div>
         <img width={100} src="image/watch-movie.svg" alt="Лого" />
       </div>
-      <Spinner />
-      {/*<div>*/}
-      {/*  <h3>Фильмы</h3>*/}
-      {/*  <MenuList items={props.filmGenres} />*/}
-      {/*</div>*/}
-      {/*<div>*/}
-      {/*  <h3>Жанры</h3>*/}
-      {/*  <MenuList items={props.genres} />*/}
-      {/*</div>*/}
+      {props.isLoading && <Spinner />}
+      {!props.isLoading && (
+      <>
+        <div>
+          <h3>Фильмы</h3>
+          <MenuList items={props.filmGenres} handleClick={props.handleFilmTabClick} />
+        </div>
+        <div>
+          <h3>Жанры</h3>
+          <MenuList items={props.genres} handleClick={props.handleGenreTabClick} />
+        </div>
+      </>
+      )}
     </aside>
   );
 };

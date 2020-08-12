@@ -1,21 +1,18 @@
 const FILM_NAVIGATION = [
   {
     name: "Популярные",
-    label: "Popular",
+    label: "popular",
     icon: "fas fa-heart",
-    isActive: true,
   },
   {
     name: "Самые популярные",
-    label: "Top rated",
+    label: "top_rated",
     icon: "fas fa-chart-line",
-    isActive: false,
   },
   {
     name: "Скоро в кино",
-    label: "Upcoming",
+    label: "upcoming",
     icon: "fas fa-table",
-    isActive: false,
   },
 ];
 

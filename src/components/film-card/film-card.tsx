@@ -1,6 +1,11 @@
 // https://image.tmdb.org/t/p/w342/
 
-const FilmCard: React.FC = (props: any): JSX.Element => {
+interface IFilmCard {
+  name: string,
+  poster: string
+}
+
+const FilmCard: React.FC<IFilmCard> = (props: IFilmCard): JSX.Element => {
   return (
     <a href="https://">
       <div className="film-card">
