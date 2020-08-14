@@ -1,6 +1,8 @@
 import { put, call, takeEvery } from "redux-saga/effects";
 import ActionType from "@redux/reducers/films/constants/constants";
-import { getFilmsSuccess, getFilmsError } from "@redux/reducers/films/actions/actions";
+import {
+  getFilmsSuccess, getFilmsError, getMoreFilmsSuccess, getMoreFilmsRequest, getCurrentPage, getTotalFilmsPages
+} from "@redux/reducers/films/actions/actions";
 import Service from "../../../../api/api";
 
 type TParamsPayload = {
@@ -12,12 +14,22 @@ interface TParams {
   type: string
 }
 
+function* filmsMoreSaga(page: any) {
+  try {
+    const response = yield call(Service.discoverMovieByGenre, page);
+    yield put(getMoreFilmsSuccess(response.data.results));
+  } catch (e) {
+    yield put(getFilmsError());
+  }
+}
+
 function* filmsSaga(params: TParams) {
   try {
     const { type } = params.payload;
     let response;
     if (typeof type === "string") {
       response = yield call(Service.getFilms, type);
+      yield put(getCurrentPage(response.data.page));
     }
 
     if (typeof type === "number") {
@@ -25,10 +37,15 @@ function* filmsSaga(params: TParams) {
     }
     yield put(getFilmsSuccess(response.data.results));
   } catch (e) {
+    yield put(getFilmsError());
     throw new Error("Ошибка при получении списка фильмов");
   }
 }
 
-export default function* watchFilmsSaga() {
+export function* watchFilmsSaga() {
   yield takeEvery(ActionType.GET_FILMS_REQUEST, filmsSaga);
+}
+
+export function* watchMoreFilmsSaga() {
+  yield takeEvery(ActionType.GET_MORE_FILM_REQUEST, filmsMoreSaga);
 }

@@ -1,4 +1,3 @@
-import { TFilmNavigation } from "@constants/types/types";
 import ActionType from "@redux/reducers/genres/constants/constants";
 
 // Экшены
@@ -29,14 +28,15 @@ type GenreActionTypes =
   | TChangeGenre;
 
 type TGenre = {
-  id: number,
+  id?: number,
   name: string
   icon: string
+  label?: string
 };
 
 interface IGenreState {
   genres: Array<TGenre> | [],
-  filmGenres: Array<TFilmNavigation>,
+  filmGenres: Array<TGenre>,
   active: string,
   loading: boolean,
   error: boolean

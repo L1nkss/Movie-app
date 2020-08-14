@@ -1,13 +1,12 @@
 import MenuList from "@components/menu-list/menu-list.connect";
 import { useEffect } from "react";
 import { TGenre } from "@redux/reducers/genres/types/types";
-import { TFilmNavigation } from "@constants/types/types";
 import Spinner from "@components/spinner/spinner";
 
 interface IAsideMenuProps {
   isLoading: boolean,
   genres: Array<TGenre> | [],
-  filmGenres: Array<TFilmNavigation>,
+  filmGenres: Array<TGenre>,
   loadGenres: () => void
   handleFilmTabClick: (type: string) => void,
   handleGenreTabClick: (id: number) => void

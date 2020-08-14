@@ -6,6 +6,9 @@ const initialState: IFilmsState = {
   films: [],
   loading: false,
   error: false,
+  currentPage: 0,
+  totalPages: 0,
+  searchString: "",
 };
 
 const reducer: Reducer<IFilmsState> = (state = initialState, action): IFilmsState => {
@@ -16,8 +19,20 @@ const reducer: Reducer<IFilmsState> = (state = initialState, action): IFilmsStat
     case ActionType.GET_FILM_SUCCESS:
       return { ...state, loading: false, films: action.payload };
 
+    case ActionType.GET_MORE_FILM_SUCCESS:
+      return { ...state, loading: false, films: [...state.films, action.payload] };
+
+    case ActionType.GET_TOTAL_FILMS_PAGES:
+      return { ...state, totalPages: action.payload };
+
+    case ActionType.GET_LOADED_PAGE:
+      return { ...state, currentPage: action.payload };
+
     case ActionType.GET_FILM_ERROR:
       return { ...state, loading: false, error: true };
+
+    case ActionType.SET_SEARCH_STRING:
+      return { ...state, searchString: action.payload };
 
     default:
       return state;

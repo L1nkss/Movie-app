@@ -7,7 +7,7 @@ type TFilmRequest = {
 // Экшены
 export type TFilmsRequest = {
   type: typeof ActionType.GET_FILMS_REQUEST,
-  payload: TFilmRequest
+  payload?: TFilmRequest
 };
 
 export type TFilmsSuccess = {
@@ -46,7 +46,10 @@ type TServerFilm = {
 interface IFilmsState {
   films: Array<TFilm> | [],
   loading: boolean,
-  error: boolean
+  error: boolean,
+  currentPage: number,
+  totalPages: number,
+  searchString: string | "",
 }
 
 export { IFilmsState, TFilm, TServerFilm };

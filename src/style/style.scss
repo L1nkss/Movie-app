@@ -36,9 +36,16 @@ body {
 }
 
 // Боковое меню
+.side-menu::-webkit-scrollbar {
+    display: none;
+}
 .side-menu {
-    position: relative;
-    min-height: 100vh;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    overflow-y: scroll;
+    position: fixed;
+    width: 220px;
+    height: 100%;
     border-right: 1px solid white;
     padding: 20px
 }
@@ -53,6 +60,7 @@ body {
 }
 
 .main {
+    margin-left: 220px;
     flex-grow: 1;
     padding: 20px;
 }
@@ -80,7 +88,7 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 320px));
     grid-column-gap: 24px;
-    grid-row-gap: 18px;
+    grid-row-gap: 32px;
     padding: 26px 0;
 }
 
@@ -88,19 +96,35 @@ body {
     border-radius: 8px;
     overflow: hidden;
     transition: .7s;
+    position: relative;
 
     &:hover {
         transition: .7s;
-        background-color: lighten($main-color, 10);
-        box-shadow: 0px 2px 23px -4px rgba($main-color , 1);
+        transform: scale(1.1);
     }
 
     &__image {
         width: 100%;
     }
 
-    &__wrapper {
-        text-align: center;
+    &__rating {
+        position: absolute;
+        top: 6px;
+        right: 10px;
+        border-radius: 6px;
+        padding: 2px 8px;
+
+        &--high-rate {
+            background-color: #3bb33b;
+        }
+
+        &--medium-rate {
+            background-color: #aaa;
+        }
+
+        &--low-rate {
+            background-color: red;
+        }
     }
 }
 
@@ -129,6 +153,13 @@ body {
     &-icon {
         margin-right: 8px;
     }
+}
+
+.error {
+    position: absolute;
+    top: 0;
+    text-align: center;
+    width: 100%;
 }
 
 
