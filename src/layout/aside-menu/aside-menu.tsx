@@ -20,7 +20,7 @@ const AsideMenu: React.FC<IAsideMenuProps> = (props: IAsideMenuProps): JSX.Eleme
   return (
     <aside className="side-menu">
       <div>
-        <img width={100} src="image/watch-movie.svg" alt="Лого" />
+        <img width={100} src="/image/watch-movie.svg" alt="Лого" />
       </div>
       {props.isLoading && <Spinner />}
       {!props.isLoading && (

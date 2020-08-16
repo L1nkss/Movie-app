@@ -16,6 +16,13 @@ const FILM_NAVIGATION = [
   },
 ];
 
+const RoutePathes = {
+  MOVIES: "/movies",
+  FILM_DETAILS: "/film-details",
+  NOT_FOUND: "/not-found",
+  ROOT: "/",
+};
+
 const BASE_URL = "https://cors-anywhere.herokuapp.com/https://api.themoviedb.org/3";
 
-export { FILM_NAVIGATION, BASE_URL };
+export { FILM_NAVIGATION, BASE_URL, RoutePathes };

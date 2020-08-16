@@ -215,3 +215,23 @@ $duration: 1.4s;
     animation: dash $duration ease-in-out infinite,
                 colors ($duration * 4) ease-in-out infinite;
 }
+
+
+// Детальная информафия о фильме
+.film-details {
+    display: flex;
+    max-width: 1260px;
+    margin: 0 auto;
+
+    &__header {
+        display: flex;
+    }
+
+    &__header-text {
+        margin: 0;
+    }
+
+    &__header-information {
+        margin: 0;
+    }
+}

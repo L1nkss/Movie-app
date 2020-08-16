@@ -1,46 +1,15 @@
-import Header from "@components/header/header.connect";
-import { useEffect } from "react";
-import FilmCard from "@components/film-card/film-card";
-import Spinner from "@components/spinner/spinner";
-import { TFilm } from "@redux/reducers/films/types/types";
-import Mistake from "@components/mistake/mistake";
+import FilmDetails from "@components/film-details/film-details.connect";
+import { Switch, Route } from "react-router-dom";
+import { RoutePathes } from "@constants/contants";
+import FilmList from "@components/film-list/film-list.connect";
+import NotFound from "@components/not-found/not-found";
+import Routes from "../../routes/routes";
+import { withRouter } from "react-router-dom";
 
-interface IMain {
-  films: Array<TFilm>,
-  loading: boolean,
-  loadFilms: (type: string) => void,
-  currentGenre: string,
-  error: boolean,
-}
-
-const Main: React.FC<IMain> = (props: IMain): JSX.Element => {
-  console.log(props);
-  const { loading, error } = props;
-  useEffect(() => {
-    props.loadFilms(props.currentGenre);
-  }, []);
-
-  function createFilmCards() {
-    return props.films.map((film: TFilm) => {
-      return (
-        <FilmCard
-          key={film.id}
-          poster={film.posterPath}
-          vote={film.voteAverage}
-        />
-      );
-    });
-  }
-
+const Main: React.FC = (): JSX.Element => {
   return (
     <div className="main">
-      <Header />
-
-      <div className="film-list">
-        {loading && <Spinner />}
-        {!loading && createFilmCards()}
-        {error && <Mistake />}
-      </div>
+      <Routes />
     </div>
   );
 };
