@@ -4,6 +4,17 @@ type TFilmRequest = {
   type: string | number
 };
 
+type TFilmDetailsGenres = {
+  id: number,
+  name: string
+};
+
+type TFilmDetailsState = {
+  loading: boolean,
+  error: boolean,
+  details: null | TFilmDetails,
+};
+
 // Экшены
 export type TFilmsRequest = {
   type: typeof ActionType.GET_FILMS_REQUEST,
@@ -31,6 +42,13 @@ type TFilm = {
   releaseDate: string
 };
 
+type TFilmDetails = TFilm & {
+  homepage: string,
+  runtime: number,
+  tagline: string,
+  genres: Array<TFilmDetailsGenres>
+};
+
 type TServerFilm = {
   genre_ids: Array<number>,
   id: number,
@@ -43,6 +61,13 @@ type TServerFilm = {
   release_date: string
 };
 
+type TFilmDetailServer = TServerFilm & {
+  homepage: string,
+  runtime: number,
+  tagline: string,
+  genres: Array<TFilmDetailsGenres>,
+};
+
 interface IFilmsState {
   films: Array<TFilm> | [],
   loading: boolean,
@@ -50,6 +75,7 @@ interface IFilmsState {
   currentPage: number,
   totalPages: number,
   searchString: string | "",
+  filmDetails: TFilmDetailsState,
 }
 
-export { IFilmsState, TFilm, TServerFilm };
+export { IFilmsState, TFilm, TServerFilm, TFilmDetails, TFilmDetailServer, TFilmDetailsGenres };

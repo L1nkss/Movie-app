@@ -1,7 +1,7 @@
 import { put, call, takeEvery } from "redux-saga/effects";
 import ActionType from "@redux/reducers/films/constants/constants";
 import {
-  getFilmsSuccess, getFilmsError, getMoreFilmsSuccess, getMoreFilmsRequest, getCurrentPage, getTotalFilmsPages
+  getFilmsSuccess, getFilmsError, getMoreFilmsSuccess, getMoreFilmsRequest, getCurrentPage, getTotalFilmsPages, getFilmDetailsSuccess
 } from "@redux/reducers/films/actions/actions";
 import Service from "../../../../api/api";
 
@@ -26,8 +26,10 @@ function* filmsMoreSaga(page: any) {
 function* filmsSaga(params: TParams) {
   try {
     const { type } = params.payload;
+    console.log(type);
     let response;
     if (typeof type === "string") {
+      console.log(type)
       response = yield call(Service.getFilms, type);
       yield put(getCurrentPage(response.data.page));
     }
@@ -42,10 +44,23 @@ function* filmsSaga(params: TParams) {
   }
 }
 
+function* getFilmDetailsSaga(params: any) {
+  try {
+    const response = yield call(Service.getFilmDetails, Number(params.payload));
+    yield put(getFilmDetailsSuccess(response.data));
+  } catch (e) {
+    throw new Error("Ошибка при получении информации о фильме");
+  }
+}
+
 export function* watchFilmsSaga() {
   yield takeEvery(ActionType.GET_FILMS_REQUEST, filmsSaga);
 }
 
 export function* watchMoreFilmsSaga() {
   yield takeEvery(ActionType.GET_MORE_FILM_REQUEST, filmsMoreSaga);
+}
+
+export function* watchFilmDetailsSaga() {
+  yield takeEvery(ActionType.GET_FILM_DETAILS_REQUEST, getFilmDetailsSaga);
 }

@@ -4,8 +4,6 @@ import FilmCard from "@components/film-card/film-card";
 import Spinner from "@components/spinner/spinner";
 import Mistake from "@components/mistake/mistake";
 import Header from "@components/header/header.connect";
-import {Redirect} from "react-router";
-import {RoutePathes} from "@constants/contants";
 
 interface IFilmListProps {
   films: Array<TFilm>,

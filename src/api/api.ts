@@ -22,6 +22,7 @@ class Api {
     this.getGenres = this.getGenres.bind(this);
     this.getFilms = this.getFilms.bind(this);
     this.discoverMovieByGenre = this.discoverMovieByGenre.bind(this);
+    this.getFilmDetails = this.getFilmDetails.bind(this);
   }
 
   getGenres() {
@@ -34,6 +35,10 @@ class Api {
 
   discoverMovieByGenre(id: number) {
     return this.api.get("discover/movie", { params: { api_key: this.token, with_genres: id } });
+  }
+
+  getFilmDetails(id: number) {
+    return this.api.get(`movie/${id}`, { params: { api_key: this.token } });
   }
 }
 

@@ -4,6 +4,11 @@ import { IFilmsState } from "@redux/reducers/films/types/types";
 
 const initialState: IFilmsState = {
   films: [],
+  filmDetails: {
+    loading: false,
+    error: false,
+    details: null,
+  },
   loading: false,
   error: false,
   currentPage: 0,
@@ -33,6 +38,15 @@ const reducer: Reducer<IFilmsState> = (state = initialState, action): IFilmsStat
 
     case ActionType.SET_SEARCH_STRING:
       return { ...state, searchString: action.payload };
+
+    case ActionType.GET_FILM_DETAILS_REQUEST:
+      return { ...state, filmDetails: { ...state.filmDetails, loading: true } };
+
+    case ActionType.GET_FILM_DETAILS_SUCCESS:
+      return { ...state, filmDetails: { ...state.filmDetails, loading: false, details: action.payload } };
+
+    case ActionType.GET_FILM_DETAILS_ERROR:
+      return { ...state, filmDetails: { ...state.filmDetails, loading: false, error: true } };
 
     default:
       return state;

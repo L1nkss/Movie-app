@@ -3,7 +3,7 @@ import {
 } from "react-router-dom";
 import { RoutePathes } from "@constants/contants";
 import FilmList from "@components/film-list/film-list.connect";
-import FilmDetails from "@components/film-details/film-details";
+import FilmDetails from "@components/film-details/film-details.connect";
 
 const Routes = () => {
   return (
