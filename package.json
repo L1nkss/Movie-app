@@ -7,8 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "eslint": "eslint --ext .tsx --ext ts src/",
     "jest": "jest --config ./jest.config.js",
-    "start": "webpack-dev-server",
-    "build": "webpack"
+    "start": "webpack-dev-server"
   },
   "repository": {
     "type": "git",

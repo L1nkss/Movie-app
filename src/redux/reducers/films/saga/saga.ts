@@ -26,10 +26,8 @@ function* filmsMoreSaga(page: any) {
 function* filmsSaga(params: TParams) {
   try {
     const { type } = params.payload;
-    console.log(type);
     let response;
     if (typeof type === "string") {
-      console.log(type)
       response = yield call(Service.getFilms, type);
       yield put(getCurrentPage(response.data.page));
     }

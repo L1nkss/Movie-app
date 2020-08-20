@@ -4,12 +4,12 @@ import FilmList from "@components/film-list/film-list";
 import { Dispatch } from "redux";
 import { TFilmsRequest } from "@redux/reducers/films/types/types";
 import { getFilmsRequest } from "@redux/reducers/films/actions/actions";
-import getFilteredFilms from "./selectors/selectors";
+import { getFilteredFilms, getActiveGenre } from "./selectors/selectors";
 
 const mapStateToProps = (state: IRootState) => ({
   loading: state.films.loading,
   error: state.films.error,
-  currentGenre: state.genre.active,
+  currentGenre: getActiveGenre(state),
   films: getFilteredFilms(state),
 });
 

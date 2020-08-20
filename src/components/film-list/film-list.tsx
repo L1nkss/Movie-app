@@ -19,6 +19,10 @@ const FilmList: React.FC<IFilmListProps> = (props: IFilmListProps): JSX.Element 
     props.loadFilms(props.currentGenre);
   }, []);
 
+  useEffect(() => {
+    props.loadFilms(props.currentGenre);
+  }, [props.currentGenre]);
+
   function createFilmCards() {
     return props.films.map((film: TFilm) => {
       return (

@@ -1,14 +1,11 @@
-import { THandleClick } from "@components/menu-list/menu-list";
 import { TGenre } from "@redux/reducers/genres/types/types";
+import { RoutePathes } from "@constants/contants";
 import history from "../../../utils/history";
-import {RoutePathes} from "@constants/contants";
-import { withRouter } from "react-router";
 
 interface IMenuListItem {
   item: TGenre,
   active: string,
   changeActiveGenre: (name: string) => void,
-  handleClick: THandleClick<number | string>
 }
 
 const MenuListItem: React.FC<IMenuListItem> = (props: IMenuListItem): JSX.Element => {
@@ -22,13 +19,8 @@ const MenuListItem: React.FC<IMenuListItem> = (props: IMenuListItem): JSX.Elemen
         }
         // Меняем активный жанр
         props.changeActiveGenre(props.item.label);
+
         history.push(RoutePathes.MOVIES);
-        // Запускаем сагу на получение фильмов(если ключ ID существует, отправяем по жанрам)
-        if (props.item.id) {
-          props.handleClick(props.item.id);
-          return;
-        }
-        props.handleClick(props.item.label);
       }}
     >
       <span className={`menu-list__item-icon ${props.item.icon}`} />

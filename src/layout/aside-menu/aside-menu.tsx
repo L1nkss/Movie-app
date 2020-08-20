@@ -8,8 +8,6 @@ interface IAsideMenuProps {
   genres: Array<TGenre> | [],
   filmGenres: Array<TGenre>,
   loadGenres: () => void
-  handleFilmTabClick: (type: string) => void,
-  handleGenreTabClick: (id: number) => void
 }
 
 // Todo испраавить
@@ -27,11 +25,11 @@ const AsideMenu: React.FC<IAsideMenuProps> = (props: IAsideMenuProps): JSX.Eleme
       <>
         <div>
           <h3>Фильмы</h3>
-          <MenuList items={props.filmGenres} handleClick={props.handleFilmTabClick} />
+          <MenuList items={props.filmGenres} />
         </div>
         <div>
           <h3>Жанры</h3>
-          <MenuList items={props.genres} handleClick={props.handleGenreTabClick} />
+          <MenuList items={props.genres} />
         </div>
       </>
       )}

@@ -1,6 +1,6 @@
 import { createSelector } from "reselect";
 import { IRootState } from "@redux/reducers/types/types";
-import {TFilm} from "@redux/reducers/films/types/types";
+import { TFilm } from "@redux/reducers/films/types/types";
 
 const getFilteredFilms = createSelector(
   (state: IRootState) => { return state.films.films; },
@@ -12,4 +12,13 @@ const getFilteredFilms = createSelector(
   },
 );
 
-export default getFilteredFilms;
+const getActiveGenre = createSelector(
+  (state: IRootState) => { return [...state.genre.filmGenres, ...state.genre.genres]; },
+  (state: IRootState) => { return state.genre.active},
+  (genres, active: string): number | string => {
+    const idx = genres.findIndex((genre) => genre.label === active);
+    return genres[idx].id ? genres[idx].id : genres[idx].label;
+  },
+);
+
+export {getFilteredFilms, getActiveGenre};
