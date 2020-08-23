@@ -223,12 +223,27 @@ $duration: 1.4s;
     max-width: 1260px;
     margin: 0 auto;
 
-    &__header {
+    .menu-list {
         display: flex;
+    }
+
+    .menu-list__item {
+        padding-left: 0;
+    }
+
+    &__wrapper {
+        padding: 0 42px;
+    }
+
+    &__header-inner {
+        display: flex;
+        align-items: center;
     }
 
     &__header-text {
         margin: 0;
+        font-weight: 500;
+        margin-right: 32px;
     }
 
     &__header-information {

@@ -13,7 +13,7 @@ class Api {
       params: {
         api_key: token,
       },
-      timeout: 10000,
+      timeout: 90000,
       headers: { "X-Custom-Header": "foobar" },
       withCredentials: false,
     });
@@ -23,6 +23,7 @@ class Api {
     this.getFilms = this.getFilms.bind(this);
     this.discoverMovieByGenre = this.discoverMovieByGenre.bind(this);
     this.getFilmDetails = this.getFilmDetails.bind(this);
+    this.getRecommendations = this.getRecommendations.bind(this);
   }
 
   getGenres() {
@@ -39,6 +40,10 @@ class Api {
 
   getFilmDetails(id: number) {
     return this.api.get(`movie/${id}`, { params: { api_key: this.token } });
+  }
+
+  getRecommendations(id: number) {
+    return this.api.get(`movie/${id}/recommendations`, { params: { api_key: this.token } });
   }
 }
 

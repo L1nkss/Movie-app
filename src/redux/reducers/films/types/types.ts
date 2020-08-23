@@ -1,13 +1,16 @@
 import ActionType from "@redux/reducers/films/constants/constants";
+import { TGenre } from "@redux/reducers/genres/types/types";
 
 type TFilmRequest = {
   type: string | number
 };
 
-type TFilmDetailsGenres = {
-  id: number,
-  name: string
-};
+// type TFilmDetailsGenres = {
+//   id: number,
+//   name: string
+//   icon: string,
+//   label
+// };
 
 type TFilmDetailsState = {
   loading: boolean,
@@ -46,7 +49,7 @@ type TFilmDetails = TFilm & {
   homepage: string,
   runtime: number,
   tagline: string,
-  genres: Array<TFilmDetailsGenres>
+  genres: Array<TGenre>
 };
 
 type TServerFilm = {
@@ -65,7 +68,7 @@ type TFilmDetailServer = TServerFilm & {
   homepage: string,
   runtime: number,
   tagline: string,
-  genres: Array<TFilmDetailsGenres>,
+  genres: Array<TGenre>,
 };
 
 interface IFilmsState {
@@ -78,4 +81,4 @@ interface IFilmsState {
   filmDetails: TFilmDetailsState,
 }
 
-export { IFilmsState, TFilm, TServerFilm, TFilmDetails, TFilmDetailServer, TFilmDetailsGenres };
+export { IFilmsState, TFilm, TServerFilm, TFilmDetails, TFilmDetailServer };

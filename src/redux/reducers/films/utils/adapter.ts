@@ -1,4 +1,5 @@
-import {TServerFilm, TFilmDetailServer} from "@redux/reducers/films/types/types";
+import { TServerFilm, TFilmDetailServer } from "@redux/reducers/films/types/types";
+import genreAdapter from "@redux/reducers/genres/utils/adapter";
 
 class Adapter {
   static changeKeyName(values: Array<TServerFilm>) {
@@ -21,7 +22,7 @@ class Adapter {
 
   static changeValuesToFilmDetails(value: TFilmDetailServer) {
     return {
-      genreIds: value.genre_ids,
+      // genreIds: value.genre_ids,
       id: value.id,
       overview: value.overview,
       title: value.title,
@@ -33,7 +34,8 @@ class Adapter {
       homepage: value.homepage,
       runtime: value.runtime,
       tagline: value.tagline,
-      genres: value.genres,
+      // genres: value.genres,
+      genres: genreAdapter.addIconField(value.genres),
     };
   }
 }
