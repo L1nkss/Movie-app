@@ -5,13 +5,6 @@ type TFilmRequest = {
   type: string | number
 };
 
-// type TFilmDetailsGenres = {
-//   id: number,
-//   name: string
-//   icon: string,
-//   label
-// };
-
 type TFilmDetailsState = {
   loading: boolean,
   error: boolean,

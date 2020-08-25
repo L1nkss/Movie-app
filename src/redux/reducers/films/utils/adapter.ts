@@ -22,7 +22,6 @@ class Adapter {
 
   static changeValuesToFilmDetails(value: TFilmDetailServer) {
     return {
-      // genreIds: value.genre_ids,
       id: value.id,
       overview: value.overview,
       title: value.title,
@@ -34,7 +33,6 @@ class Adapter {
       homepage: value.homepage,
       runtime: value.runtime,
       tagline: value.tagline,
-      // genres: value.genres,
       genres: genreAdapter.addIconField(value.genres),
     };
   }

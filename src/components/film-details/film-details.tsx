@@ -21,7 +21,7 @@ const FilmDetails: React.FC<IFilmDetailsProps> = (props: IFilmDetailsProps): JSX
   const { id } = props.match.params;
   const { loading, error, details } = props;
 
-  function getFilmRecommendations() {
+  function getFilmRecommendations(): void {
     // Получаем список рекомендаций
     Service.getRecommendations(id)
       .then((body) => {
@@ -31,7 +31,7 @@ const FilmDetails: React.FC<IFilmDetailsProps> = (props: IFilmDetailsProps): JSX
       });
   }
 
-  useEffect(() => {
+  useEffect((): void => {
     // Загружаем детальную информацию о фильме
     props.loadDetails(id);
 
@@ -39,10 +39,10 @@ const FilmDetails: React.FC<IFilmDetailsProps> = (props: IFilmDetailsProps): JSX
   }, []);
 
   // Загружаем новые данные, если обновился ID фильма
-  useEffect(() => {
+  useEffect((): void => {
     props.loadDetails(id);
   }, [id]);
-
+  console.log(details);
   return (
     <>
       {loading && <Spinner />}
@@ -79,7 +79,7 @@ const FilmDetails: React.FC<IFilmDetailsProps> = (props: IFilmDetailsProps): JSX
                   </p>
                 </div>
                 <div>
-                  <button type="button" onClick={() => { history.goBack(); }}>Назад</button>
+                  <button className="film-details__button" type="button" onClick={() => { history.goBack(); }}>Назад</button>
                 </div>
               </div>
             </>

@@ -1,7 +1,7 @@
 import { put, call, takeEvery } from "redux-saga/effects";
 import ActionType from "@redux/reducers/films/constants/constants";
 import {
-  getFilmsSuccess, getFilmsError, getMoreFilmsSuccess, getMoreFilmsRequest, getCurrentPage, getTotalFilmsPages, getFilmDetailsSuccess
+  getFilmsSuccess, getFilmsError, getMoreFilmsSuccess, getCurrentPage, getFilmDetailsSuccess
 } from "@redux/reducers/films/actions/actions";
 import Service from "../../../../api/api";
 

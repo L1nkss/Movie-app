@@ -25,11 +25,11 @@ const FilmList: React.FC<IFilmListProps> = (props: IFilmListProps): JSX.Element 
 
   return (
     <>
+      {loading && <Spinner />}
+      {error && <Mistake />}
       <Header />
       <div className="film-list">
         {!loading && !error && createFilmCards(props.films) }
-        {loading && <Spinner />}
-        {error && <Mistake />}
       </div>
     </>
   );
