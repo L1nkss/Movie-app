@@ -21,6 +21,8 @@ const RoutePathes = {
   FILM_DETAILS: "/film-details",
   NOT_FOUND: "/not-found",
   ROOT: "/",
+  CAST: "/cast",
+  ACTOR: "/actor",
 };
 
 const BASE_URL = "https://cors-anywhere.herokuapp.com/https://api.themoviedb.org/3";

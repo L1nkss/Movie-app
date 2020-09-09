@@ -63,7 +63,7 @@ body {
     margin-left: 220px;
     min-height: 100vh;
     flex-grow: 1;
-    padding: 20px;
+    padding: 30px;
     position: relative;
 }
 
@@ -92,6 +92,11 @@ body {
     grid-column-gap: 24px;
     grid-row-gap: 32px;
     padding: 26px 0;
+
+    // Модификатор для размера карточек
+    &--small {
+        grid-template-columns: repeat(auto-fit, minmax(230px, 230px));
+    }
 }
 
 .film-card {
@@ -99,6 +104,7 @@ body {
     overflow: hidden;
     transition: .7s;
     position: relative;
+    height: 100%;
 
     &:hover {
         transition: .7s;
@@ -107,6 +113,14 @@ body {
 
     &__image {
         width: 100%;
+        height: inherit;
+    }
+
+    &__no-image {
+        min-height: 350px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     &__rating {
@@ -222,23 +236,59 @@ $duration: 1.4s;
                 colors ($duration * 4) ease-in-out infinite;
 }
 
+// Рейтинг
+.rating {
+    display: flex;
+
+    &__start {
+        font-size: 24px;
+        margin-right: 8px;
+    }
+
+    &__vote-count {
+        font-size: 10px;
+    }
+
+    &__inner {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
 
 // Детальная информафия о фильме
 .film-details {
     display: flex;
-    max-width: 1260px;
-    margin: 0 auto;
 
     .menu-list {
         display: flex;
+    }
+
+    &__description {
+        margin-bottom: 16px;
     }
 
     .menu-list__item {
         padding-left: 0;
     }
 
+    &__rating {
+        margin-left: 40px;
+        flex-shrink: 0;
+    }
+
+    &__poster {
+        width: 342px;
+        flex-shrink: 0;
+        height: 513px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
     &__wrapper {
         padding: 0 42px;
+        max-width: 1045px;
     }
 
     &__header-inner {
@@ -272,5 +322,79 @@ $duration: 1.4s;
             border-color: transparent;
             color: $main-color;
         }
+    }
+}
+
+.cast {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+
+    &__item {
+        width: 140px;
+        box-shadow: 0 2px 8px rgba($secondary-color, 0.1);
+        border-radius: 2px;
+        transition: box-shadow 0.3s ease-in-out;
+        margin-bottom: 16px;
+
+        &:not(:last-child) {
+            margin-right: 16px;
+        }
+
+        &:hover {
+            box-shadow: 0 2px 8px rgba($secondary-color, 0.7);
+        }
+    }
+
+    &__actor {
+        display: block;
+        width: 140px;
+        height: 190px;
+        overflow-y: hidden;
+    }
+
+    &__image {
+        width: 100%;
+        height: auto;
+    }
+
+    &__wrapper {
+        padding: 0 8px;
+    }
+
+    &__name {
+        font-weight: 700;
+    }
+}
+
+.actors {
+    &__header {
+        display: flex;
+        align-items: center;
+    }
+
+    &__back-button {
+        background-color: transparent;
+        border: 0;
+        margin-left: auto;
+    }
+
+    &__icon {
+        color: #ECDFBD;
+        font-size: 24px;
+    }
+}
+
+.actor-details {
+    display: flex;
+
+    &__information {
+        padding: 0 42px;
+        max-width: 1045px;
+    }
+
+    &__name {
+        margin: 0;
+        font-weight: 500;
     }
 }

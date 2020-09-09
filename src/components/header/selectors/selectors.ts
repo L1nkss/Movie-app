@@ -1,6 +1,6 @@
-import { createSelector } from "reselect"
+import { createSelector } from "reselect";
 import { IRootState } from "@redux/reducers/types/types";
-import {TGenre} from "@redux/reducers/genres/types/types";
+import { TGenre } from "@redux/reducers/genres/types/types";
 
 const getActiveGenreName = createSelector(
   (state: IRootState): Array<TGenre> => { return [...state.genre.genres, ...state.genre.filmGenres]; },

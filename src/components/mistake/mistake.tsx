@@ -1,4 +1,4 @@
-const Mistake = () => {
+const Mistake: React.FC = () => {
   return (
     <div className="error">
       <div className="error__wrapper">

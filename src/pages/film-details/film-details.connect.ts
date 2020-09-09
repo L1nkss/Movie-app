@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import FilmDetails from "@components/film-details/film-details";
+import FilmDetails from "@pages/film-details/film-details";
 import { Dispatch } from "redux";
 import { getFilmDetailsRequest } from "@redux/reducers/films/actions/actions";
 import { IRootState } from "@redux/reducers/types/types";

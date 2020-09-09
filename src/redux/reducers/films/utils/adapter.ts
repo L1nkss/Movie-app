@@ -33,6 +33,7 @@ class Adapter {
       homepage: value.homepage,
       runtime: value.runtime,
       tagline: value.tagline,
+      voteCount: value.vote_count,
       genres: genreAdapter.addIconField(value.genres),
     };
   }

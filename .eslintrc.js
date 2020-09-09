@@ -17,6 +17,7 @@ module.exports = {
         "react/destructuring-assignment": "off",
         "no-plusplus": "off",
         "max-len": ["error", {"code": 150}],
+        "react/jsx-props-no-spreading": "off",
         "react-hooks/rules-of-hooks": "error", // Проверяем правила хуков
         "react-hooks/exhaustive-deps": "warn" // Проверяем зависимости эффекта
     }

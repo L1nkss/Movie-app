@@ -5,8 +5,11 @@ import Spinner from "@components/spinner/spinner";
 import MenuList from "@components/menu-list/menu-list.connect";
 import Adapter from "@redux/reducers/films/utils/adapter";
 import createFilmCards from "@components/film-list/utils/utils";
+import Rating from "@components/rating/rating";
+import Cast from "@components/cast/cast";
 import history from "../../utils/history";
 import Service from "../../api/api";
+import CastAdapter from "../../utils/cast-adapter";
 
 interface IFilmDetailsProps {
   loadDetails: (id: number) => void,
@@ -18,53 +21,72 @@ interface IFilmDetailsProps {
 
 const FilmDetails: React.FC<IFilmDetailsProps> = (props: IFilmDetailsProps): JSX.Element => {
   const [filmsRecommendations, setFilms] = useState([]);
+  const [isRecommendationsLoading, setRecommendationLoader] = useState(false);
+  const [isCastLoading, setLoading] = useState(false);
+  const [cast, setCast] = useState([]);
   const { id } = props.match.params;
   const { loading, error, details } = props;
 
-  function getFilmRecommendations(): void {
+  const getFilmRecommendations = React.useCallback(() => {
+    setRecommendationLoader(true);
     // Получаем список рекомендаций
     Service.getRecommendations(id)
       .then((body) => {
-        // setFilms(body.data.results.slice(0, 6))
-        const films = Adapter.changeKeyName(body.data.results.slice(0, 6));
+        const films = Adapter.changeKeyName(body.data.results.slice(0, 12));
         setFilms(films);
+        setRecommendationLoader(false);
       });
-  }
+  }, [id]);
 
-  useEffect((): void => {
-    // Загружаем детальную информацию о фильме
-    props.loadDetails(id);
+  const getFilmCast = React.useCallback(() => {
+    setLoading(true);
 
-    getFilmRecommendations();
-  }, []);
+    Service.getFilmCast(id)
+      .then((body) => {
+        setCast(CastAdapter.adaptValues(body.data.cast));
+        setLoading(false);
+      });
+  }, [id]);
 
   // Загружаем новые данные, если обновился ID фильма
   useEffect((): void => {
     props.loadDetails(id);
+
+    // Получаем список рекомандаций к фильму
+    getFilmRecommendations();
+
+    // Загружаем актерский состав
+    getFilmCast();
   }, [id]);
-  console.log(details);
+  const isContentLoading = loading || isCastLoading;
   return (
     <>
-      {loading && <Spinner />}
-      {details && !loading && (
+      {isContentLoading && <Spinner />}
+      {details && !isContentLoading && (
         <>
           <div className="film-details">
             <>
-              <div className="film-details__poster">
-                <img src={`https://image.tmdb.org/t/p/w342/${details.posterPath}`} alt="Изображение" />
+              <div className={`${details.posterPath ? "" : "film-details__poster"}`}>
+                {details.posterPath
+                  ? <img src={`https://image.tmdb.org/t/p/w342/${details.posterPath}`} alt="Изображение" />
+                  : <>No poster :(</>}
               </div>
               <div className="film-details__wrapper">
                 <div className="film-details__header">
                   <div className="film-details__header-inner">
-                    <h1 className="film-details__header-text">{details.title}</h1>
-                    <p className="film-details__header-information">
-                      {details.voteAverage}
-                      {" "}
-                      /
-                      {details.runtime !== 0 ? `${details.runtime} min. /` : null }
-                      {" "}
-                      2020
-                    </p>
+                    <div>
+                      <h1 className="film-details__header-text">{details.title}</h1>
+                      <p className="film-details__header-information">
+                        {details.runtime !== 0 ? `${details.runtime} min. /` : null }
+                        {" "}
+                        2020
+                      </p>
+                    </div>
+                    <Rating
+                      containerClass="film-details__rating"
+                      voteAverage={details.voteAverage}
+                      voteCount={details.voteCount}
+                    />
                   </div>
                   <h2 className="film-details__header-subtext">{details.tagline}</h2>
                 </div>
@@ -78,6 +100,10 @@ const FilmDetails: React.FC<IFilmDetailsProps> = (props: IFilmDetailsProps): JSX
                     {details.overview}
                   </p>
                 </div>
+                <div className="film-details__description">
+                  <h3>В ролях: </h3>
+                  <Cast cast={cast} itemsToShow={6} id={id} />
+                </div>
                 <div>
                   <button className="film-details__button" type="button" onClick={() => { history.goBack(); }}>Назад</button>
                 </div>
@@ -86,8 +112,9 @@ const FilmDetails: React.FC<IFilmDetailsProps> = (props: IFilmDetailsProps): JSX
           </div>
           <div>
             <h2>Возможно вам понравится: </h2>
-            <div className="film-list">
-              {createFilmCards(filmsRecommendations)}
+            <div className="film-list film-list--small">
+              {isRecommendationsLoading && <Spinner />}
+              {!isRecommendationsLoading && createFilmCards(filmsRecommendations)}
             </div>
           </div>
         </>

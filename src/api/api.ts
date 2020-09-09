@@ -24,6 +24,9 @@ class Api {
     this.discoverMovieByGenre = this.discoverMovieByGenre.bind(this);
     this.getFilmDetails = this.getFilmDetails.bind(this);
     this.getRecommendations = this.getRecommendations.bind(this);
+    this.getFilmCast = this.getFilmCast.bind(this);
+    this.getPersonDetails = this.getPersonDetails.bind(this);
+    this.discover = this.discover.bind(this);
   }
 
   getGenres() {
@@ -44,6 +47,18 @@ class Api {
 
   getRecommendations(id: number) {
     return this.api.get(`movie/${id}/recommendations`, { params: { api_key: this.token } });
+  }
+
+  getFilmCast(id: number) {
+    return this.api.get(`movie/${id}/credits`, { params: { api_key: this.token } });
+  }
+
+  getPersonDetails(id: number) {
+    return this.api.get(`person/${id}`, { params: { api_key: this.token } });
+  }
+
+  discover(params: any) {
+    return this.api.get("discover/movie", { params: { api_key: this.token, ...params } });
   }
 }
 

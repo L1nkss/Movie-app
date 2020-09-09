@@ -12,7 +12,8 @@
         "paths": {
             "@components/*": ["src/components/*"],
             "@constants/*": ["src/constants/*"],
-            "@redux/*": ["src/redux/*"]
+            "@redux/*": ["src/redux/*"],
+            "@pages/*": ["src/pages/*"]
         }
     },
     "exclude": [

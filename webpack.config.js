@@ -12,6 +12,7 @@ module.exports = {
       React: "react",
     }),
   ],
+  devtool: "source-map",
   devServer: {
     contentBase: path.join(__dirname, "public"),
     publicPath: "/",
@@ -51,6 +52,7 @@ module.exports = {
       "@components": path.resolve(__dirname, "src/components/"),
       "@constants": path.resolve(__dirname, "src/constants/"),
       "@redux": path.resolve(__dirname, "src/redux/"),
+      "@pages": path.resolve(__dirname, "src/pages/"),
     },
   },
 };

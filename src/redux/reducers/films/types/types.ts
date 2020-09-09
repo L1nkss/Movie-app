@@ -43,6 +43,7 @@ type TFilmDetails = TFilm & {
   runtime: number,
   tagline: string,
   genres: Array<TGenre>
+  voteCount: number
 };
 
 type TServerFilm = {
@@ -62,6 +63,7 @@ type TFilmDetailServer = TServerFilm & {
   runtime: number,
   tagline: string,
   genres: Array<TGenre>,
+  vote_count: number
 };
 
 interface IFilmsState {
@@ -74,4 +76,6 @@ interface IFilmsState {
   filmDetails: TFilmDetailsState,
 }
 
-export { IFilmsState, TFilm, TServerFilm, TFilmDetails, TFilmDetailServer };
+export {
+  IFilmsState, TFilm, TServerFilm, TFilmDetails, TFilmDetailServer,
+};
