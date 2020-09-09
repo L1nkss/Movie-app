@@ -3,7 +3,7 @@ import Cast from "@components/cast/cast";
 import Spinner from "@components/spinner/spinner";
 import { useEffect, useState } from "react";
 import Service from "../../api/api";
-import CastAdapter from "../../utils/cast-adapter";
+import CastAdapter from "../../utils/adapters/cast";
 import history from "../../utils/history";
 
 // todo исправить

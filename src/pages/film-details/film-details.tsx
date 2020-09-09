@@ -3,13 +3,13 @@ import TMatch from "@constants/types";
 import { TFilmDetails } from "@redux/reducers/films/types/types";
 import Spinner from "@components/spinner/spinner";
 import MenuList from "@components/menu-list/menu-list.connect";
-import Adapter from "@redux/reducers/films/utils/adapter";
 import createFilmCards from "@components/film-list/utils/utils";
 import Rating from "@components/rating/rating";
 import Cast from "@components/cast/cast";
+import FilmAdapter from "../../utils/adapters/film";
 import history from "../../utils/history";
 import Service from "../../api/api";
-import CastAdapter from "../../utils/cast-adapter";
+import CastAdapter from "../../utils/adapters/cast";
 
 interface IFilmDetailsProps {
   loadDetails: (id: number) => void,
@@ -32,7 +32,7 @@ const FilmDetails: React.FC<IFilmDetailsProps> = (props: IFilmDetailsProps): JSX
     // Получаем список рекомендаций
     Service.getRecommendations(id)
       .then((body) => {
-        const films = Adapter.changeKeyName(body.data.results.slice(0, 12));
+        const films = FilmAdapter.changeKeyName(body.data.results.slice(0, 12));
         setFilms(films);
         setRecommendationLoader(false);
       });
@@ -58,6 +58,7 @@ const FilmDetails: React.FC<IFilmDetailsProps> = (props: IFilmDetailsProps): JSX
     // Загружаем актерский состав
     getFilmCast();
   }, [id]);
+
   const isContentLoading = loading || isCastLoading;
   return (
     <>
@@ -79,7 +80,7 @@ const FilmDetails: React.FC<IFilmDetailsProps> = (props: IFilmDetailsProps): JSX
                       <p className="film-details__header-information">
                         {details.runtime !== 0 ? `${details.runtime} min. /` : null }
                         {" "}
-                        2020
+                        {new Date(props.details.releaseDate).getFullYear()}
                       </p>
                     </div>
                     <Rating

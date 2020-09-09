@@ -1,14 +1,12 @@
 import Spinner from "@components/spinner/spinner";
 import { useEffect, useState } from "react";
-import Adapter from "@redux/reducers/films/utils/adapter";
 import { TFilm } from "@redux/reducers/films/types/types";
 import createFilmCards from "@components/film-list/utils/utils";
 import moment from "moment";
+import FilmAdapter from "../../utils/adapters/film";
 import Service from "../../api/api";
-import CastAdapter from "../../utils/cast-adapter";
-import history from "../../utils/history";
-import ActorAdapter from "../../utils/actor-adapter";
-import { compareDates } from "../../utils/utils";
+import ActorAdapter from "../../utils/adapters/actor";
+import { calculateAge } from "../../utils/utils";
 
 interface IActorState {
   films?: Array<TFilm>,
@@ -24,14 +22,8 @@ interface IActorState {
 const Actor: React.FC<any> = (props: any): JSX.Element => {
   const { id } = props.match.params;
   const [isPersonDetailsLoading, setLoading] = useState(false);
-  const [details, setDetails] = useState<IActorState>({});
+  const [details, setDetails] = useState<IActorState>();
   const [isDataLoaded, setDataLoadedStatus] = useState(false);
-
-  const calculateAge = (date) => {
-    const dateNow = moment();
-    const test = moment(date, "YYYY");
-    return dateNow.diff(test, "years");
-  };
 
   const compareFilmsByDate = (first: TFilm, second: TFilm): number => {
     const firstDate = first.releaseDate ? first.releaseDate : first.firstAirDate;
@@ -48,12 +40,11 @@ const Actor: React.FC<any> = (props: any): JSX.Element => {
       await Service.getPersonDetails(id)
         .then((body) => {
           setDetails(((prevState) => ({ ...prevState, ...ActorAdapter.adaptValues(body.data) })));
-          // setDetails(ActorAdapter.adaptValues(body.data));
         });
 
       await Service.getCombine(id)
         .then((body) => {
-          return Adapter.changeKeyName(body.data.cast);
+          return FilmAdapter.changeKeyName(body.data.cast);
         })
         .then((films) => {
           const filteredFilm = films.sort(compareFilmsByDate);
@@ -64,7 +55,11 @@ const Actor: React.FC<any> = (props: any): JSX.Element => {
       setDataLoadedStatus(true);
     };
 
-    innerAsyncFunction();
+    try {
+      innerAsyncFunction();
+    } catch (e) {
+      throw new Error();
+    }
   }, []);
 
   return (
@@ -92,7 +87,7 @@ const Actor: React.FC<any> = (props: any): JSX.Element => {
               <h3>Дата смерти</h3>
               <p>
                 {moment(details.deathDay).format("DD MMMM YYYY") }
-                {` (${calculateAge(details.deathDay)})`}
+                {` (${calculateAge(details.birthday, details.deathDay, false)})`}
               </p>
             </div>
             )}
@@ -103,8 +98,11 @@ const Actor: React.FC<any> = (props: any): JSX.Element => {
             </div>
           </div>
         </div>
-        <div className="film-list film-list--small">
-           {createFilmCards(details.films)}
+        <div>
+          <h2>Фильмография: </h2>
+          <div className="film-list film-list--small">
+            {createFilmCards(details.films)}
+          </div>
         </div>
       </>
       )}

@@ -1,3 +1,5 @@
+import moment from "moment";
+
 const getRatingClass = (vote: number): string => {
   let result;
 
@@ -16,8 +18,11 @@ const getRatingClass = (vote: number): string => {
   return `film-card__rating--${result}-rate`;
 };
 
-const compareDates = (first: string, second: string) => {
-  return new Date(second) > new Date(first);
+const calculateAge = (birthDate: string, deathDate: string = null, type = true): number => {
+  const dateStart = type ? moment() : moment(deathDate, "YYYY");
+  const dateEnd = moment(birthDate, "YYYY");
+
+  return dateStart.diff(dateEnd, "years");
 };
 
-export { getRatingClass, compareDates };
+export { getRatingClass, calculateAge };
