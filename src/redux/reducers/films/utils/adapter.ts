@@ -7,6 +7,7 @@ class Adapter {
   }
 
   static changeValues(value: TServerFilm) {
+    console.log(value);
     return {
       genreIds: value.genre_ids,
       id: value.id,

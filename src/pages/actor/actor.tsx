@@ -43,10 +43,15 @@ const Actor: React.FC<any> = (props: any): JSX.Element => {
           // setDetails(ActorAdapter.adaptValues(body.data));
         });
 
-      await Service.discover({ with_cast: id, sort_by: "release_date.desc" })
+      await Service.getCombine(id)
         .then((body) => {
-          setDetails(((prevState) => ({ ...prevState, films: Adapter.changeKeyName(body.data.results) })));
+          setDetails(((prevState) => ({ ...prevState, films: Adapter.changeKeyName(body.data.cast) })));
         });
+
+      // await Service.discover({ with_cast: id, sort_by: "release_date.desc" })
+      //   .then((body) => {
+      //     setDetails(((prevState) => ({ ...prevState, films: Adapter.changeKeyName(body.data.results) })));
+      //   });
 
       setLoading(false);
       setDataLoadedStatus(true);
@@ -62,7 +67,7 @@ const Actor: React.FC<any> = (props: any): JSX.Element => {
       && (
       <>
         <div className="actor-details">
-          <img src={`https://image.tmdb.org/t/p/w342/${details.profilePath}`} alt="" />
+          <img className="actor-details__image" src={`https://image.tmdb.org/t/p/w342/${details.profilePath}`} alt="" />
           <div className="actor-details__information">
             <h2 className="actor-details__name">{details.name}</h2>
 

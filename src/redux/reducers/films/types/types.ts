@@ -56,6 +56,8 @@ type TServerFilm = {
   original_language: string,
   vote_average: number,
   release_date: string
+  media_type: string,
+  first_air_date?: string
 };
 
 type TFilmDetailServer = TServerFilm & {

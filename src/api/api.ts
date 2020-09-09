@@ -27,6 +27,7 @@ class Api {
     this.getFilmCast = this.getFilmCast.bind(this);
     this.getPersonDetails = this.getPersonDetails.bind(this);
     this.discover = this.discover.bind(this);
+    this.getCombine = this.getCombine.bind(this);
   }
 
   getGenres() {
@@ -55,6 +56,10 @@ class Api {
 
   getPersonDetails(id: number) {
     return this.api.get(`person/${id}`, { params: { api_key: this.token } });
+  }
+
+  getCombine(id: number) {
+    return this.api.get(`person/${id}/combined_credits`, { params: { api_key: this.token } });
   }
 
   discover(params: any) {
