@@ -35,7 +35,9 @@ type TFilm = {
   title: string,
   voteAverage: number,
   overview: string,
-  releaseDate: string
+  releaseDate: string | undefined,
+  mediaType: string | undefined,
+  firstAirDate: string | undefined,
 };
 
 type TFilmDetails = TFilm & {
@@ -56,7 +58,7 @@ type TServerFilm = {
   original_language: string,
   vote_average: number,
   release_date: string
-  media_type: string,
+  media_type?: string,
   first_air_date?: string
 };
 

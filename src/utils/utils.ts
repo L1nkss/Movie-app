@@ -16,4 +16,8 @@ const getRatingClass = (vote: number): string => {
   return `film-card__rating--${result}-rate`;
 };
 
-export default getRatingClass;
+const compareDates = (first: string, second: string) => {
+  return new Date(second) > new Date(first);
+};
+
+export { getRatingClass, compareDates };

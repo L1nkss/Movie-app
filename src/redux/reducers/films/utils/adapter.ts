@@ -7,7 +7,6 @@ class Adapter {
   }
 
   static changeValues(value: TServerFilm) {
-    console.log(value);
     return {
       genreIds: value.genre_ids,
       id: value.id,
@@ -18,6 +17,8 @@ class Adapter {
       originalLanguage: value.original_language,
       voteAverage: value.vote_average,
       releaseDate: value.release_date,
+      mediaType: value.media_type,
+      firstAirDate: value.first_air_date,
     };
   }
 

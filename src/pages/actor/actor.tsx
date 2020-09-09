@@ -8,6 +8,7 @@ import Service from "../../api/api";
 import CastAdapter from "../../utils/cast-adapter";
 import history from "../../utils/history";
 import ActorAdapter from "../../utils/actor-adapter";
+import { compareDates } from "../../utils/utils";
 
 interface IActorState {
   films?: Array<TFilm>,
@@ -32,6 +33,13 @@ const Actor: React.FC<any> = (props: any): JSX.Element => {
     return dateNow.diff(test, "years");
   };
 
+  const compareFilmsByDate = (first: TFilm, second: TFilm): number => {
+    const firstDate = first.releaseDate ? first.releaseDate : first.firstAirDate;
+    const secondDate = second.releaseDate ? second.releaseDate : second.firstAirDate;
+
+    return new Date(secondDate).getTime() - new Date(firstDate).getTime();
+  };
+
   useEffect(() => {
     // Вн. асинх. функция, нужна, чтобы стейт не изменялся раньше, чем придут данные с сервера
     const innerAsyncFunction = async () => {
@@ -45,13 +53,12 @@ const Actor: React.FC<any> = (props: any): JSX.Element => {
 
       await Service.getCombine(id)
         .then((body) => {
-          setDetails(((prevState) => ({ ...prevState, films: Adapter.changeKeyName(body.data.cast) })));
+          return Adapter.changeKeyName(body.data.cast);
+        })
+        .then((films) => {
+          const filteredFilm = films.sort(compareFilmsByDate);
+          setDetails(((prevState) => ({ ...prevState, films: filteredFilm })));
         });
-
-      // await Service.discover({ with_cast: id, sort_by: "release_date.desc" })
-      //   .then((body) => {
-      //     setDetails(((prevState) => ({ ...prevState, films: Adapter.changeKeyName(body.data.results) })));
-      //   });
 
       setLoading(false);
       setDataLoadedStatus(true);
@@ -59,7 +66,7 @@ const Actor: React.FC<any> = (props: any): JSX.Element => {
 
     innerAsyncFunction();
   }, []);
-  // https://image.tmdb.org/t/p/w342/
+
   return (
     <>
       {isPersonDetailsLoading && <Spinner />}
@@ -97,7 +104,7 @@ const Actor: React.FC<any> = (props: any): JSX.Element => {
           </div>
         </div>
         <div className="film-list film-list--small">
-          {createFilmCards(details.films)}
+           {createFilmCards(details.films)}
         </div>
       </>
       )}

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { RoutePathes } from "@constants/contants";
-import getRatingClass from "../../utils/utils";
+import {getRatingClass} from "../../utils/utils";
 
 interface IFilmCard {
   poster: string,
