@@ -15,13 +15,11 @@ interface TParams {
 }
 
 function* filmsMoreSaga({ payload }: any) {
-  console.log(payload);
   try {
     const response = typeof payload.type === "string"
       ? yield call(Service.getFilms, payload.type, payload.page)
       : yield call(Service.discover, { with_genre: payload.type, page: payload.page });
 
-    console.log(response);
     yield put(getCurrentPage(response.data.page));
     yield put(getMoreFilmsSuccess(response.data.results));
     // const response = yield call(Service.discoverMovieByGenre, page);

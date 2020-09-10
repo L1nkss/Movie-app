@@ -24,7 +24,7 @@ const getMoreFilmsRequest = (type: string | number, page: number) => (
   { type: ActionType.GET_MORE_FILM_REQUEST, payload: { type, page } });
 
 // Фильмы получены
-const getMoreFilmsSuccess = (films: Array<TServerFilm>): TFilmsSuccess => (
+const getMoreFilmsSuccess = (films: Array<TServerFilm>) => (
   { type: ActionType.GET_MORE_FILM_SUCCESS, payload: FilmAdapter.changeKeyName(films) });
 
 // Ошибка при получении фильмов

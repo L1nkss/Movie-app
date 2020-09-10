@@ -16,13 +16,6 @@ interface IFilmListProps {
   totalPage: number,
 }
 
-// const loadMoreFilms = () => {
-//   if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-//     console.log("you're at the bottom of the page");
-//     // show loading spinner and make fetch request to api
-//   }
-// };
-
 const FilmList: React.FC<IFilmListProps> = (props: IFilmListProps): JSX.Element => {
   const { loading, error } = props;
 
@@ -35,27 +28,40 @@ const FilmList: React.FC<IFilmListProps> = (props: IFilmListProps): JSX.Element 
     }
   };
 
-  useEffect(() => {
-    props.loadFilms(props.currentGenre);
-  }, []);
+  // useEffect(() => {
+  //   props.loadFilms(props.currentGenre);
+  // }, []);
 
   useEffect(() => {
-    props.loadFilms(props.currentGenre);
+    window.removeEventListener("scroll", loadMoreFilms);
 
-    window.addEventListener("scroll", loadMoreFilms);
+    const innerAsyncFunction = async () => {
+      await props.loadFilms(props.currentGenre);
+
+      window.addEventListener("scroll", loadMoreFilms);
+    };
+
+    innerAsyncFunction();
+    // props.loadFilms(props.currentGenre);
+    //
+    // window.addEventListener("scroll", loadMoreFilms);
 
     return () => {
       window.removeEventListener("scroll", loadMoreFilms);
     };
   }, [props.currentGenre]);
 
+  // if (loading) {
+  //   window.addEventListener("scroll", loadMoreFilms);
+  // }
+  console.log("Фильмы которые отрисуем: ", props.films);
   return (
     <>
       {loading && <Spinner />}
       {error && <Mistake />}
       <Header />
       <div className="film-list">
-        {!loading && !error && createFilmCards(props.films) }
+        {!loading && createFilmCards(props.films) }
       </div>
     </>
   );
