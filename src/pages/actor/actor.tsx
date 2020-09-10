@@ -7,6 +7,7 @@ import FilmAdapter from "../../utils/adapters/film";
 import Service from "../../api/api";
 import ActorAdapter from "../../utils/adapters/actor";
 import { calculateAge } from "../../utils/utils";
+import ContentPlaceholder from "@components/content-placeholder/content-placeholder";
 
 interface IActorState {
   films?: Array<TFilm>,
@@ -23,14 +24,8 @@ const Actor: React.FC<any> = (props: any): JSX.Element => {
   const { id } = props.match.params;
   const [isPersonDetailsLoading, setLoading] = useState(false);
   const [details, setDetails] = useState<IActorState>();
-  const [isDataLoaded, setDataLoadedStatus] = useState(false);
-
-  const compareFilmsByDate = (first: TFilm, second: TFilm): number => {
-    const firstDate = first.releaseDate ? first.releaseDate : first.firstAirDate;
-    const secondDate = second.releaseDate ? second.releaseDate : second.firstAirDate;
-
-    return new Date(secondDate).getTime() - new Date(firstDate).getTime();
-  };
+  // const [isDataLoaded, setDataLoadedStatus] = useState(false);
+  const [isFilmLoaded, setFilmLoad] = useState(false);
 
   useEffect(() => {
     // Вн. асинх. функция, нужна, чтобы стейт не изменялся раньше, чем придут данные с сервера
@@ -42,17 +37,13 @@ const Actor: React.FC<any> = (props: any): JSX.Element => {
           setDetails(((prevState) => ({ ...prevState, ...ActorAdapter.adaptValues(body.data) })));
         });
 
-      await Service.getCombine(id)
+      await Service.discover({ with_cast: id, sort_by: "popularity.dest" })
         .then((body) => {
-          return FilmAdapter.changeKeyName(body.data.cast);
-        })
-        .then((films) => {
-          const filteredFilm = films.sort(compareFilmsByDate);
-          setDetails(((prevState) => ({ ...prevState, films: filteredFilm })));
+          setDetails(((prevState) => ({ ...prevState, films: FilmAdapter.changeKeyName(body.data.results) })));
         });
 
       setLoading(false);
-      setDataLoadedStatus(true);
+      // setDataLoadedStatus(true);
     };
 
     try {
@@ -62,10 +53,11 @@ const Actor: React.FC<any> = (props: any): JSX.Element => {
     }
   }, []);
 
+
   return (
     <>
       {isPersonDetailsLoading && <Spinner />}
-      {!isPersonDetailsLoading && isDataLoaded
+      {!isPersonDetailsLoading && details
       && (
       <>
         <div className="actor-details">
@@ -101,7 +93,8 @@ const Actor: React.FC<any> = (props: any): JSX.Element => {
         <div>
           <h2>Фильмография: </h2>
           <div className="film-list film-list--small">
-            {createFilmCards(details.films)}
+            <ContentPlaceholder />
+            {isFilmLoaded && createFilmCards(details.films)}
           </div>
         </div>
       </>

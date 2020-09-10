@@ -1,7 +1,7 @@
 import { put, call, takeEvery } from "redux-saga/effects";
 import ActionType from "@redux/reducers/films/constants/constants";
 import {
-  getFilmsSuccess, getFilmsError, getMoreFilmsSuccess, getCurrentPage, getFilmDetailsSuccess
+  getFilmsSuccess, getFilmsError, getMoreFilmsSuccess, getCurrentPage, getFilmDetailsSuccess, getFilmDetailsError
 } from "@redux/reducers/films/actions/actions";
 import Service from "../../../../api/api";
 
@@ -47,6 +47,7 @@ function* getFilmDetailsSaga(params: any) {
     const response = yield call(Service.getFilmDetails, Number(params.payload));
     yield put(getFilmDetailsSuccess(response.data));
   } catch (e) {
+    yield put(getFilmDetailsError());
     throw new Error("Ошибка при получении информации о фильме");
   }
 }

@@ -5,6 +5,12 @@ function createFilmCards(films: Array<TFilm>): Array<JSX.Element> {
   return films.map((film: TFilm) => {
     let filmCardProps = {};
 
+    if (film.mediaType) {
+      filmCardProps = {
+        mediaType: film.mediaType,
+      };
+    }
+
     if (!film.posterPath) {
       filmCardProps = {
         name: film.title,

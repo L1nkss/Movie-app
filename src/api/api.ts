@@ -26,14 +26,14 @@ class Api {
     this.getRecommendations = this.getRecommendations.bind(this);
     this.getFilmCast = this.getFilmCast.bind(this);
     this.getPersonDetails = this.getPersonDetails.bind(this);
-    // this.discover = this.discover.bind(this);
-    this.getCombine = this.getCombine.bind(this);
+    this.discover = this.discover.bind(this);
+    // this.getCombine = this.getCombine.bind(this);
   }
 
   // Общие запросы
-  getCombine(id: number) {
-    return this.api.get(`person/${id}/combined_credits`, { params: { api_key: this.token } });
-  }
+  // getCombine(id: number) {
+  //   return this.api.get(`person/${id}/combined_credits`, { params: { api_key: this.token } });
+  // }
 
   // Жанры
   getGenres() {
@@ -67,9 +67,9 @@ class Api {
     return this.api.get(`person/${id}`, { params: { api_key: this.token } });
   }
 
-  // discover(params: any) {
-  //   return this.api.get("discover/movie", { params: { api_key: this.token, ...params } });
-  // }
+  discover(params: any) {
+    return this.api.get("discover/movie", { params: { api_key: this.token, ...params } });
+  }
 }
 
 export default new Api(BASE_URL, key);

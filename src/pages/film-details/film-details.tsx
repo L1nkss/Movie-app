@@ -10,6 +10,7 @@ import FilmAdapter from "../../utils/adapters/film";
 import history from "../../utils/history";
 import Service from "../../api/api";
 import CastAdapter from "../../utils/adapters/cast";
+import Mistake from "@components/mistake/mistake";
 
 interface IFilmDetailsProps {
   loadDetails: (id: number) => void,
@@ -45,6 +46,9 @@ const FilmDetails: React.FC<IFilmDetailsProps> = (props: IFilmDetailsProps): JSX
       .then((body) => {
         setCast(CastAdapter.adaptValues(body.data.cast));
         setLoading(false);
+      })
+      .catch(() => {
+        setLoading(false);
       });
   }, [id]);
 
@@ -62,6 +66,7 @@ const FilmDetails: React.FC<IFilmDetailsProps> = (props: IFilmDetailsProps): JSX
   const isContentLoading = loading || isCastLoading;
   return (
     <>
+      {error && <Mistake />}
       {isContentLoading && <Spinner />}
       {details && !isContentLoading && (
         <>
