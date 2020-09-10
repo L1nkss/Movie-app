@@ -9,18 +9,44 @@ interface IFilmListProps {
   films: Array<TFilm>,
   loading: boolean,
   loadFilms: (type: string) => void,
+  loadMoreFilms: (type: string, page: number) => void,
   currentGenre: string,
   error: boolean,
+  currentPage: number,
+  totalPage: number,
 }
+
+// const loadMoreFilms = () => {
+//   if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+//     console.log("you're at the bottom of the page");
+//     // show loading spinner and make fetch request to api
+//   }
+// };
 
 const FilmList: React.FC<IFilmListProps> = (props: IFilmListProps): JSX.Element => {
   const { loading, error } = props;
+
+  const loadMoreFilms = () => {
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+      if (props.currentPage <= props.totalPage) {
+        const nextPage = props.currentPage + 1;
+        props.loadMoreFilms(props.currentGenre, nextPage);
+      }
+    }
+  };
+
   useEffect(() => {
     props.loadFilms(props.currentGenre);
   }, []);
 
   useEffect(() => {
     props.loadFilms(props.currentGenre);
+
+    window.addEventListener("scroll", loadMoreFilms);
+
+    return () => {
+      window.removeEventListener("scroll", loadMoreFilms);
+    };
   }, [props.currentGenre]);
 
   return (

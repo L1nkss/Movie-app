@@ -6,11 +6,11 @@ import MenuList from "@components/menu-list/menu-list.connect";
 import createFilmCards from "@components/film-list/utils/utils";
 import Rating from "@components/rating/rating";
 import Cast from "@components/cast/cast";
+import Mistake from "@components/mistake/mistake";
 import FilmAdapter from "../../utils/adapters/film";
 import history from "../../utils/history";
 import Service from "../../api/api";
 import CastAdapter from "../../utils/adapters/cast";
-import Mistake from "@components/mistake/mistake";
 
 interface IFilmDetailsProps {
   loadDetails: (id: number) => void,

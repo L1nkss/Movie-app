@@ -12,7 +12,7 @@ interface IFilmCard {
 const FilmCard: React.FC<IFilmCard> = (props: IFilmCard): JSX.Element => {
   const { vote } = props;
   const voteRating = getRatingClass(vote);
-  console.log(props);
+
   return (
     <Link to={`${RoutePathes.FILM_DETAILS}/${props.id}`}>
       <div className="film-card">

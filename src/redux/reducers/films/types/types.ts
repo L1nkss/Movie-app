@@ -5,6 +5,11 @@ type TFilmRequest = {
   type: string | number
 };
 
+type TFilmsSuccessPayload = {
+  data: Array<TFilm>,
+  totalPages: number
+};
+
 type TFilmDetailsState = {
   loading: boolean,
   error: boolean,
@@ -19,7 +24,8 @@ export type TFilmsRequest = {
 
 export type TFilmsSuccess = {
   type: typeof ActionType.GET_FILM_SUCCESS,
-  payload: Array<TFilm>
+  // payload: Array<TFilm>
+  payload: TFilmsSuccessPayload
 };
 
 export type TFilmsError = {

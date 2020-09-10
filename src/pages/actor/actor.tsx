@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 import { TFilm } from "@redux/reducers/films/types/types";
 import createFilmCards from "@components/film-list/utils/utils";
 import moment from "moment";
+import ContentPlaceholder from "@components/content-placeholder/content-placeholder";
 import FilmAdapter from "../../utils/adapters/film";
 import Service from "../../api/api";
 import ActorAdapter from "../../utils/adapters/actor";
 import { calculateAge } from "../../utils/utils";
-import ContentPlaceholder from "@components/content-placeholder/content-placeholder";
 
 interface IActorState {
   films?: Array<TFilm>,
@@ -37,22 +37,22 @@ const Actor: React.FC<any> = (props: any): JSX.Element => {
           setDetails(((prevState) => ({ ...prevState, ...ActorAdapter.adaptValues(body.data) })));
         });
 
-      await Service.discover({ with_cast: id, sort_by: "popularity.dest" })
-        .then((body) => {
-          setDetails(((prevState) => ({ ...prevState, films: FilmAdapter.changeKeyName(body.data.results) })));
-        });
-
       setLoading(false);
       // setDataLoadedStatus(true);
     };
 
     try {
       innerAsyncFunction();
+
+      Service.discover({ with_cast: id, sort_by: "popularity.dest" })
+        .then((body) => {
+          setDetails(((prevState) => ({ ...prevState, films: FilmAdapter.changeKeyName(body.data.results) })));
+          setFilmLoad(true);
+        });
     } catch (e) {
       throw new Error();
     }
   }, []);
-
 
   return (
     <>
@@ -93,7 +93,7 @@ const Actor: React.FC<any> = (props: any): JSX.Element => {
         <div>
           <h2>Фильмография: </h2>
           <div className="film-list film-list--small">
-            <ContentPlaceholder />
+            {!isFilmLoaded && <ContentPlaceholder count={3} />}
             {isFilmLoaded && createFilmCards(details.films)}
           </div>
         </div>

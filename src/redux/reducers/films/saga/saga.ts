@@ -1,7 +1,7 @@
 import { put, call, takeEvery } from "redux-saga/effects";
 import ActionType from "@redux/reducers/films/constants/constants";
 import {
-  getFilmsSuccess, getFilmsError, getMoreFilmsSuccess, getCurrentPage, getFilmDetailsSuccess, getFilmDetailsError
+  getFilmsSuccess, getFilmsError, getCurrentPage, getMoreFilmsSuccess, getFilmDetailsSuccess, getFilmDetailsError,
 } from "@redux/reducers/films/actions/actions";
 import Service from "../../../../api/api";
 
@@ -14,10 +14,18 @@ interface TParams {
   type: string
 }
 
-function* filmsMoreSaga(page: any) {
+function* filmsMoreSaga({ payload }: any) {
+  console.log(payload);
   try {
-    const response = yield call(Service.discoverMovieByGenre, page);
+    const response = typeof payload.type === "string"
+      ? yield call(Service.getFilms, payload.type, payload.page)
+      : yield call(Service.discover, { with_genre: payload.type, page: payload.page });
+
+    console.log(response);
+    yield put(getCurrentPage(response.data.page));
     yield put(getMoreFilmsSuccess(response.data.results));
+    // const response = yield call(Service.discoverMovieByGenre, page);
+    // yield put(getMoreFilmsSuccess(response.data.results));
   } catch (e) {
     yield put(getFilmsError());
   }
@@ -26,16 +34,10 @@ function* filmsMoreSaga(page: any) {
 function* filmsSaga(params: TParams) {
   try {
     const { type } = params.payload;
-    let response;
-    if (typeof type === "string") {
-      response = yield call(Service.getFilms, type);
-      yield put(getCurrentPage(response.data.page));
-    }
-
-    if (typeof type === "number") {
-      response = yield call(Service.discoverMovieByGenre, type);
-    }
-    yield put(getFilmsSuccess(response.data.results));
+    // изменить апи на нормальный discover
+    const response = typeof type === "string" ? yield call(Service.getFilms, type) : yield call(Service.discoverMovieByGenre, type);
+    yield put(getCurrentPage(response.data.page));
+    yield put(getFilmsSuccess(response.data.results, response.data.total_pages));
   } catch (e) {
     yield put(getFilmsError());
     throw new Error("Ошибка при получении списка фильмов");

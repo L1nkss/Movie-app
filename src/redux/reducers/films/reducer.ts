@@ -22,10 +22,14 @@ const reducer: Reducer<IFilmsState> = (state = initialState, action): IFilmsStat
       return { ...state, loading: true };
 
     case ActionType.GET_FILM_SUCCESS:
-      return { ...state, loading: false, films: action.payload };
+      console.log(action.payload);
+      return {
+        ...state, loading: false, films: action.payload.data, totalPages: action.payload.totalPages,
+      };
 
     case ActionType.GET_MORE_FILM_SUCCESS:
-      return { ...state, loading: false, films: [...state.films, action.payload] };
+      console.log([...state.films, ...action.payload]);
+      return { ...state, loading: false, films: [...state.films, ...action.payload] };
 
     case ActionType.GET_TOTAL_FILMS_PAGES:
       return { ...state, totalPages: action.payload };

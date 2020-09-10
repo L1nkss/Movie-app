@@ -41,8 +41,8 @@ class Api {
   }
 
   // Запросы по фильмам
-  getFilms(type: string) {
-    return this.api.get(`movie/${type}`, { params: { api_key: this.token } });
+  getFilms(type: string, page = 1) {
+    return this.api.get(`movie/${type}`, { params: { api_key: this.token, page } });
   }
 
   discoverMovieByGenre(id: number) {

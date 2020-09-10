@@ -15,10 +15,13 @@ const getTotalFilmsPages = (pages: number) => ({ type: ActionType.GET_TOTAL_FILM
 const getCurrentPage = (page: number) => ({ type: ActionType.GET_LOADED_PAGE, payload: page });
 
 // Фильмы получены успешно
-const getFilmsSuccess = (films: Array<TServerFilm>): TFilmsSuccess => ({ type: ActionType.GET_FILM_SUCCESS, payload: FilmAdapter.changeKeyName(films) });
+const getFilmsSuccess = (films: Array<TServerFilm>, totalPages: number): TFilmsSuccess => (
+  { type: ActionType.GET_FILM_SUCCESS, payload: { data: FilmAdapter.changeKeyName(films), totalPages } }
+);
 
 // Получить больше фильмов(следующая страница с фильмами). Запрос
-const getMoreFilmsRequest = (): TFilmsRequest => ({ type: ActionType.GET_MORE_FILM_REQUEST });
+const getMoreFilmsRequest = (type: string | number, page: number) => (
+  { type: ActionType.GET_MORE_FILM_REQUEST, payload: { type, page } });
 
 // Фильмы получены
 const getMoreFilmsSuccess = (films: Array<TServerFilm>): TFilmsSuccess => (
