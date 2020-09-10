@@ -1,7 +1,7 @@
 import Spinner from "@components/spinner/spinner";
 import { useEffect, useState } from "react";
 import { TFilm } from "@redux/reducers/films/types/types";
-import createFilmCards from "@components/film-list/utils/utils";
+import createFilmCards from "@pages/film-list/utils/utils";
 import moment from "moment";
 import ContentPlaceholder from "@components/content-placeholder/content-placeholder";
 import FilmAdapter from "../../utils/adapters/film";

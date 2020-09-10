@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { IRootState } from "@redux/reducers/types/types";
-import FilmList from "@components/film-list/film-list";
+import FilmList from "@pages/film-list/film-list";
 import { Dispatch } from "redux";
 import { TFilmsRequest } from "@redux/reducers/films/types/types";
 import { getFilmsRequest, getMoreFilmsRequest } from "@redux/reducers/films/actions/actions";

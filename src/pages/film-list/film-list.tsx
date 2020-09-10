@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import Spinner from "@components/spinner/spinner";
 import Mistake from "@components/mistake/mistake";
 import Header from "@components/header/header.connect";
-import createFilmCards from "@components/film-list/utils/utils";
+import createFilmCards from "@pages/film-list/utils/utils";
 
 interface IFilmListProps {
   films: Array<TFilm>,

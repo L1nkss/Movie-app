@@ -3,7 +3,7 @@ import TMatch from "@constants/types";
 import { TFilmDetails } from "@redux/reducers/films/types/types";
 import Spinner from "@components/spinner/spinner";
 import MenuList from "@components/menu-list/menu-list.connect";
-import createFilmCards from "@components/film-list/utils/utils";
+import createFilmCards from "@pages/film-list/utils/utils";
 import Rating from "@components/rating/rating";
 import Cast from "@components/cast/cast";
 import Mistake from "@components/mistake/mistake";

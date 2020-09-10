@@ -2,7 +2,7 @@ import {
   Switch, Route, Redirect,
 } from "react-router-dom";
 import { RoutePathes } from "@constants/contants";
-import FilmList from "@components/film-list/film-list.connect";
+import FilmList from "@components/../pages/film-list/film-list.connect";
 import FilmDetails from "@pages/film-details/film-details.connect";
 import Actors from "@pages/actors/actors";
 import Actor from "@pages/actor/actor";
