@@ -30,8 +30,8 @@ const reducer: Reducer<IFilmsState> = (state = initialState, action): IFilmsStat
     //   return { ...state, loading: true };
 
     case ActionType.GET_MORE_FILM_SUCCESS:
-      // console.log("Пред стейт: ", state.films);
-      // console.log("Новое значение: ", action.payload);
+      console.log("Пред стейт: ", state.films);
+      console.log("Новое значение: ", action.payload);
       return { ...state, loading: false, films: [...state.films, ...action.payload] };
 
     case ActionType.GET_TOTAL_FILMS_PAGES:

@@ -16,6 +16,7 @@ interface TParams {
 
 function* filmsMoreSaga({ payload }: any) {
   try {
+    console.log(payload.page);
     const response = typeof payload.type === "string"
       ? yield call(Service.getFilms, payload.type, payload.page)
       : yield call(Service.discover, { with_genre: payload.type, page: payload.page });
@@ -34,7 +35,9 @@ function* filmsSaga(params: TParams) {
     const { type } = params.payload;
     // изменить апи на нормальный discover
     const response = typeof type === "string" ? yield call(Service.getFilms, type) : yield call(Service.discoverMovieByGenre, type);
+    console.log(response)
     yield put(getCurrentPage(response.data.page));
+    console.log(response.data.results);
     yield put(getFilmsSuccess(response.data.results, response.data.total_pages));
   } catch (e) {
     yield put(getFilmsError());
