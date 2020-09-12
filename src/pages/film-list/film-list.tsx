@@ -1,5 +1,5 @@
 import { TFilm } from "@redux/reducers/films/types/types";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Spinner from "@components/spinner/spinner";
 import Mistake from "@components/mistake/mistake";
 import Header from "@components/header/header.connect";
@@ -18,53 +18,32 @@ interface IFilmListProps {
 
 const FilmList: React.FC<IFilmListProps> = (props: IFilmListProps): JSX.Element => {
   const { loading, error } = props;
+  const [isFetching, setIsFetching] = useState(false);
 
-  const loadMoreFilms = () => {
-    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+  const handleScroll = () => {
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && !isFetching) {
       if (props.currentPage <= props.totalPage) {
         const nextPage = props.currentPage + 1;
-        props.loadMoreFilms(props.currentGenre, nextPage);
+        setIsFetching(true);
+        // props.loadMoreFilms(props.currentGenre, nextPage);
       }
     }
   };
 
+  // Костыль, чтобы обновлять слушатель на скролле. todo исправить
   useEffect(() => {
-    if (props.films.length === 0) {
-      window.removeEventListener("scroll", loadMoreFilms);
-      return;
-    }
-    window.addEventListener("scroll", loadMoreFilms);
-  }, [props.films]);
+    setIsFetching(false);
+    window.addEventListener("scroll", handleScroll);
 
-  useEffect(() => {
     return () => {
-      window.removeEventListener("scroll", loadMoreFilms);
+      window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [props]);
 
   useEffect(() => {
-    // window.removeEventListener("scroll", loadMoreFilms);
-
-    // const innerAsyncFunction = async () => {
-    //   await props.loadFilms(props.currentGenre);
-    //
-    //   window.addEventListener("scroll", loadMoreFilms);
-    // };
-
-    // innerAsyncFunction();
     props.loadFilms(props.currentGenre);
-    //
-    // window.addEventListener("scroll", loadMoreFilms);
-
-    // return () => {
-    //   window.removeEventListener("scroll", loadMoreFilms);
-    // };
   }, [props.currentGenre]);
 
-  // if (loading) {
-  //   window.addEventListener("scroll", loadMoreFilms);
-  // }
-  // console.log("Фильмы которые отрисуем: ", props.films);
   return (
     <>
       {loading && <Spinner />}
@@ -73,6 +52,7 @@ const FilmList: React.FC<IFilmListProps> = (props: IFilmListProps): JSX.Element 
       <div className="film-list">
         {!loading && createFilmCards(props.films) }
       </div>
+      {isFetching && <Spinner isWrapperFull={false} wrapperClass="ta-c" />}
     </>
   );
 };

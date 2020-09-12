@@ -35,6 +35,11 @@ body {
     display: flex;
 }
 
+// Атомарные классы
+.ta-c {
+    text-align: center;
+}
+
 // Боковое меню
 .side-menu::-webkit-scrollbar {
     display: none;
