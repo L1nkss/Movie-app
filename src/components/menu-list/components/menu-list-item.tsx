@@ -6,6 +6,7 @@ interface IMenuListItem {
   item: TGenre,
   active: string,
   changeActiveGenre: (name: string) => void,
+  refreshCurrentPage: () => void,
 }
 
 const MenuListItem: React.FC<IMenuListItem> = (props: IMenuListItem): JSX.Element => {
@@ -19,6 +20,8 @@ const MenuListItem: React.FC<IMenuListItem> = (props: IMenuListItem): JSX.Elemen
         }
         // Меняем активный жанр
         props.changeActiveGenre(props.item.label);
+        // Обнуляем активную страницу
+        props.refreshCurrentPage();
 
         history.push(RoutePathes.MOVIES);
       }}

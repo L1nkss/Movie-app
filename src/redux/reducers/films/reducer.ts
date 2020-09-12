@@ -10,6 +10,7 @@ const initialState: IFilmsState = {
     details: null,
   },
   loading: false,
+  loadingMoreFilms: false,
   error: false,
   currentPage: 0,
   totalPages: 0,
@@ -26,13 +27,11 @@ const reducer: Reducer<IFilmsState> = (state = initialState, action): IFilmsStat
         ...state, loading: false, films: action.payload.data, totalPages: action.payload.totalPages,
       };
 
-    // case ActionType.GET_MORE_FILM_REQUEST:
-    //   return { ...state, loading: true };
+    case ActionType.GET_MORE_FILM_REQUEST:
+      return { ...state, loadingMoreFilms: true };
 
     case ActionType.GET_MORE_FILM_SUCCESS:
-      console.log("Пред стейт: ", state.films);
-      console.log("Новое значение: ", action.payload);
-      return { ...state, loading: false, films: [...state.films, ...action.payload] };
+      return { ...state, loadingMoreFilms: false, films: [...state.films, ...action.payload] };
 
     case ActionType.GET_TOTAL_FILMS_PAGES:
       return { ...state, totalPages: action.payload };

@@ -16,15 +16,12 @@ interface TParams {
 
 function* filmsMoreSaga({ payload }: any) {
   try {
-    console.log(payload.page);
     const response = typeof payload.type === "string"
       ? yield call(Service.getFilms, payload.type, payload.page)
-      : yield call(Service.discover, { with_genre: payload.type, page: payload.page });
+      : yield call(Service.discover, { with_genres: payload.type, page: payload.page });
 
     yield put(getCurrentPage(response.data.page));
     yield put(getMoreFilmsSuccess(response.data.results));
-    // const response = yield call(Service.discoverMovieByGenre, page);
-    // yield put(getMoreFilmsSuccess(response.data.results));
   } catch (e) {
     yield put(getFilmsError());
   }
@@ -33,11 +30,8 @@ function* filmsMoreSaga({ payload }: any) {
 function* filmsSaga(params: TParams) {
   try {
     const { type } = params.payload;
-    // изменить апи на нормальный discover
-    const response = typeof type === "string" ? yield call(Service.getFilms, type) : yield call(Service.discoverMovieByGenre, type);
-    console.log(response)
+    const response = typeof type === "string" ? yield call(Service.getFilms, type) : yield call(Service.discover, { with_genres: type });
     yield put(getCurrentPage(response.data.page));
-    console.log(response.data.results);
     yield put(getFilmsSuccess(response.data.results, response.data.total_pages));
   } catch (e) {
     yield put(getFilmsError());

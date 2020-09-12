@@ -4,6 +4,7 @@ import { changeActiveGenre } from "@redux/reducers/genres/actions/actions";
 import { IRootState } from "@redux/reducers/types/types";
 import { Dispatch } from "redux";
 import { GenreActionTypes } from "@redux/reducers/genres/types/types";
+import {getCurrentPage} from "@redux/reducers/films/actions/actions";
 
 const mapStateToProps = (state: IRootState) => ({
   activeGenre: state.genre.active,
@@ -11,6 +12,7 @@ const mapStateToProps = (state: IRootState) => ({
 
 const mapDispatchToProps = (dispatch: Dispatch<GenreActionTypes>) => ({
   changeActiveGenre: (active: string) => dispatch(changeActiveGenre(active)),
+  refreshCurrentPage: () => dispatch(getCurrentPage(0)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MenuList);

@@ -42,7 +42,8 @@ class Api {
 
   // Запросы по фильмам
   getFilms(type: string, page = 1) {
-    return this.api.get(`movie/${type}`, { params: { api_key: this.token, page, language: "en-US" } });
+    console.log("Вызываем фильм");
+    return this.api.get(`movie/${type}`, { params: { api_key: this.token, language: "en-US", page } });
   }
 
   discoverMovieByGenre(id: number) {
@@ -68,6 +69,7 @@ class Api {
   }
 
   discover(params: any) {
+    console.log("Изучаем фильм");
     return this.api.get("discover/movie", { params: { api_key: this.token, ...params } });
   }
 }

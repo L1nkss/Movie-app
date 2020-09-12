@@ -5,6 +5,7 @@ interface IMenuListProps {
   items: Array<TGenre>,
   activeGenre: string,
   changeActiveGenre: (name: string) => void,
+  refreshCurrentPage: () => void,
   noActive?: boolean,
 }
 
@@ -18,6 +19,7 @@ const MenuList: React.FC<IMenuListProps> = (props: IMenuListProps): JSX.Element 
             item={item}
             active={props.noActive ? "" : props.activeGenre}
             changeActiveGenre={props.changeActiveGenre}
+            refreshCurrentPage={props.refreshCurrentPage}
           />
         );
       })}

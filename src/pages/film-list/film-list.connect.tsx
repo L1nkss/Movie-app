@@ -8,6 +8,7 @@ import { getFilteredFilms, getActiveGenre } from "./selectors/selectors";
 
 const mapStateToProps = (state: IRootState) => ({
   loading: state.films.loading,
+  loadingMoreFilms: state.films.loadingMoreFilms,
   error: state.films.error,
   currentGenre: getActiveGenre(state),
   currentPage: state.films.currentPage,

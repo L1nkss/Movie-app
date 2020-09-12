@@ -14,26 +14,27 @@ interface IFilmListProps {
   error: boolean,
   currentPage: number,
   totalPage: number,
+  loadingMoreFilms: boolean
 }
 
 const FilmList: React.FC<IFilmListProps> = (props: IFilmListProps): JSX.Element => {
   const { loading, error } = props;
-  const [isFetching, setIsFetching] = useState(false);
+  // const [isFetching, setIsFetching] = useState(false);
 
   const handleScroll = () => {
-    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && !isFetching) {
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && !props.loadingMoreFilms) {
       if (props.currentPage <= props.totalPage) {
         const nextPage = props.currentPage + 1;
-        setIsFetching(true);
-        // props.loadMoreFilms(props.currentGenre, nextPage);
+        // setIsFetching(true);
+        props.loadMoreFilms(props.currentGenre, nextPage);
       }
     }
   };
 
   // Костыль, чтобы обновлять слушатель на скролле. todo исправить
   useEffect(() => {
-    setIsFetching(false);
     window.addEventListener("scroll", handleScroll);
+    // setIsFetching(false);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -42,6 +43,8 @@ const FilmList: React.FC<IFilmListProps> = (props: IFilmListProps): JSX.Element 
 
   useEffect(() => {
     props.loadFilms(props.currentGenre);
+    // Если изменился жанр, то сбрасываем обработчик, чтобы он не срабатывал при загрузке новых фильмов
+    window.removeEventListener("scroll", handleScroll);
   }, [props.currentGenre]);
 
   return (
@@ -52,7 +55,7 @@ const FilmList: React.FC<IFilmListProps> = (props: IFilmListProps): JSX.Element 
       <div className="film-list">
         {!loading && createFilmCards(props.films) }
       </div>
-      {isFetching && <Spinner isWrapperFull={false} wrapperClass="ta-c" />}
+      {props.loadingMoreFilms && <Spinner isWrapperFull={false} wrapperClass="ta-c" />}
     </>
   );
 };

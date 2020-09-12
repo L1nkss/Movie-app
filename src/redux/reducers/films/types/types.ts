@@ -79,6 +79,7 @@ type TFilmDetailServer = TServerFilm & {
 interface IFilmsState {
   films: Array<TFilm> | [],
   loading: boolean,
+  loadingMoreFilms: boolean,
   error: boolean,
   currentPage: number,
   totalPages: number,
