@@ -44,7 +44,7 @@ const Actor: React.FC<any> = (props: any): JSX.Element => {
     try {
       innerAsyncFunction();
 
-      Service.discover({ with_cast: id, sort_by: "popularity.dest" })
+      Service.discover({ with_cast: id, sort_by: "release_date.desc" })
         .then((body) => {
           setDetails(((prevState) => ({ ...prevState, films: FilmAdapter.changeKeyName(body.data.results) })));
           setFilmLoad(true);
