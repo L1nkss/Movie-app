@@ -29,7 +29,7 @@ function* filmsMoreSaga({ payload }: any) {
 
 function* filmsSaga(params: TParams) {
   try {
-    const { type } = params.payload;
+    const type = params.payload;
     const response = typeof type === "string" ? yield call(Service.getFilms, type) : yield call(Service.discover, { with_genres: type });
     yield put(setCurrentPage(response.data.page));
     yield put(getFilmsSuccess(response.data.results, response.data.total_pages));

@@ -2,6 +2,8 @@ import axios, { AxiosInstance } from "axios";
 import { BASE_URL } from "@constants/contants";
 import key from "../../config/key";
 
+console.log(process.env);
+
 class Api {
   api: AxiosInstance;
 

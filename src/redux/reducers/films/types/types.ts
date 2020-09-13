@@ -1,4 +1,4 @@
-import { TGenre } from "@redux/reducers/genres/types/types";
+import {TGenre, TServerGenre} from "@redux/reducers/genres/types/types";
 
 type TFilmDetailsState = {
   loading: boolean,
@@ -41,7 +41,7 @@ type TFilmDetailServer = TServerFilm & {
   homepage: string,
   runtime: number,
   tagline: string,
-  genres: Array<TGenre>,
+  genres: Array<TServerGenre>,
   vote_count: number
 };
 

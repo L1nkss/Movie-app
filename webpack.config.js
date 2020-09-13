@@ -1,5 +1,6 @@
 const path = require("path");
 const webpack = require("webpack");
+const Dotenv = require("dotenv-webpack");
 
 module.exports = {
   entry: "./src/index.tsx",
@@ -10,6 +11,9 @@ module.exports = {
   plugins: [
     new webpack.ProvidePlugin({
       React: "react",
+    }),
+    new Dotenv({
+      path: "./.env",
     }),
   ],
   devtool: "source-map",

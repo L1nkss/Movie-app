@@ -1,5 +1,5 @@
 import { TFilmDetailServer } from "@redux/reducers/films/types/types";
-import genreAdapter from "@redux/reducers/genres/utils/adapter";
+import GenreAdapter from "./genre";
 
 export default class FilmDetailsAdapter {
   static changeValuesToFilmDetails(value: TFilmDetailServer) {
@@ -16,7 +16,7 @@ export default class FilmDetailsAdapter {
       runtime: value.runtime,
       tagline: value.tagline,
       voteCount: value.vote_count,
-      genres: genreAdapter.addIconField(value.genres),
+      genres: GenreAdapter.addIconField(value.genres),
     };
   }
 }

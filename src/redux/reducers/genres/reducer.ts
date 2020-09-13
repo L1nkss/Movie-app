@@ -1,4 +1,4 @@
-import { IGenreState, GenreActionTypes } from "@redux/reducers/genres/types/types";
+import { IGenreState } from "@redux/reducers/genres/types/types";
 import { FILM_NAVIGATION } from "@constants/contants";
 import ActionType from "@redux/reducers/genres/constants/constants";
 import { Reducer } from "redux";
@@ -11,7 +11,7 @@ const initialState: IGenreState = {
   error: false,
 };
 
-const reducer: Reducer<IGenreState> = (state = initialState, action: GenreActionTypes): IGenreState => {
+const reducer: Reducer<IGenreState> = (state = initialState, action): IGenreState => {
   switch (action.type) {
     case ActionType.GET_GENRES_REQUEST:
       return { ...state, loading: true };
