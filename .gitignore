@@ -2,6 +2,8 @@
 .DS_Store
 Thumbs.db
 
+.env
+
 # Файлы редактора
 .idea
 *.sublime*
