@@ -1,6 +1,6 @@
 import { TCast } from "@constants/types";
 import { Link } from "react-router-dom";
-import { RoutePathes } from "@constants/contants";
+import { RoutePathes, imageUrl } from "@constants/contants";
 
 interface ICast{
   cast: Array<TCast>,
@@ -11,6 +11,7 @@ interface ICast{
 const Cast: React.FC<ICast> = (props: ICast): JSX.Element => {
   let castToShow;
 
+  // В завимимости от пропса, показываем либо всех актеров, либо определенное количество
   if (typeof props.itemsToShow === "number") {
     castToShow = props.cast.slice(0, props.itemsToShow);
   }
@@ -26,7 +27,7 @@ const Cast: React.FC<ICast> = (props: ICast): JSX.Element => {
           return (
             <li className="cast__item" key={element.id}>
               <Link to={`${RoutePathes.ACTOR}/${element.id}`} className="cast__actor">
-                <img className="cast__image" src={`https://image.tmdb.org/t/p/w342/${element.profilePath}`} alt="" />
+                <img className="cast__image" src={`${imageUrl}${element.profilePath}`} alt="" />
               </Link>
               <div className="cast__wrapper">
                 <p>

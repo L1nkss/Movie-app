@@ -19,12 +19,13 @@ const FILM_NAVIGATION = [
 const RoutePathes = {
   MOVIES: "/movies",
   FILM_DETAILS: "/film-details",
-  NOT_FOUND: "/not-found",
   ROOT: "/",
   CAST: "/cast",
   ACTOR: "/actor",
 };
 
+const imageUrl = "https://image.tmdb.org/t/p/w342/";
+
 const BASE_URL = "https://cors-anywhere.herokuapp.com/https://api.themoviedb.org/3";
 
-export { FILM_NAVIGATION, BASE_URL, RoutePathes };
+export { FILM_NAVIGATION, BASE_URL, RoutePathes, imageUrl };

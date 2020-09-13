@@ -9,6 +9,7 @@ import ActorAdapter from "../../utils/adapters/actor";
 import { calculateAge } from "../../utils/utils";
 
 interface IActorState {
+  [key: string]: string | Array<TFilm>, // Если правильно понял, для того, чтобы обращаться по ключу
   films?: Array<TFilm>,
   biography: string,
   birthday: string,
@@ -23,7 +24,6 @@ const Actor: React.FC<any> = (props: any): JSX.Element => {
   const { id } = props.match.params;
   const [isPersonDetailsLoading, setLoading] = useState(false);
   const [details, setDetails] = useState<IActorState>();
-  // const [isDataLoaded, setDataLoadedStatus] = useState(false);
   const [isFilmLoaded, setFilmLoad] = useState(false);
 
   useEffect(() => {
@@ -37,7 +37,6 @@ const Actor: React.FC<any> = (props: any): JSX.Element => {
         });
 
       setLoading(false);
-      // setDataLoadedStatus(true);
     };
 
     try {
@@ -60,33 +59,45 @@ const Actor: React.FC<any> = (props: any): JSX.Element => {
       && (
       <>
         <div className="actor-details">
-          <img className="actor-details__image" src={`https://image.tmdb.org/t/p/w342/${details.profilePath}`} alt="" />
+          <div className="actor-details__image-wrapper">
+            {details.profilePath
+              ? <img src={`https://image.tmdb.org/t/p/w342/${details.profilePath}`} alt="Фотография актера" />
+              : <p>No image</p>}
+
+          </div>
           <div className="actor-details__information">
             <h2 className="actor-details__name">{details.name}</h2>
 
-            <div>
-              <h3>Дата рождения</h3>
-              <p>
-                {moment(details.birthday).format("DD MMMM YYYY") }
-                {details.deathDay ? null : ` (${calculateAge(details.birthday)})`}
-              </p>
-            </div>
+            {details.birthday
+             && (
+             <div>
+               <h3>Дата рождения</h3>
+               <p>
+                 {moment(details.birthday).format("DD MMMM YYYY") }
+                 {details.deathDay ? null : ` (${calculateAge(details.birthday)})`}
+               </p>
+             </div>
+             )}
 
             {details.deathDay
-            && (
-            <div>
-              <h3>Дата смерти</h3>
-              <p>
-                {moment(details.deathDay).format("DD MMMM YYYY") }
-                {` (${calculateAge(details.birthday, details.deathDay, false)})`}
-              </p>
-            </div>
-            )}
+             && (
+             <div>
+               <h3>Дата смерти</h3>
+               <p>
+                 {moment(details.deathDay).format("DD MMMM YYYY") }
+                 {` (${calculateAge(details.birthday, details.deathDay, false)})`}
+               </p>
+             </div>
+             )}
 
+            {details.biography
+            && (
             <div>
               <h3>Биография</h3>
               <p>{details.biography}</p>
             </div>
+            )}
+
           </div>
         </div>
         <div>

@@ -1,5 +1,5 @@
-import Main from "../../pages/main/main";
-import AsideMenu from "../../pages/aside-menu/aside-menu.connect";
+import Main from "@pages/main/main";
+import AsideMenu from "@pages/aside-menu/aside-menu.connect";
 
 const App: React.FC = () => {
   return (

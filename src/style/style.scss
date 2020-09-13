@@ -403,8 +403,12 @@ $duration: 1.4s;
         font-weight: 500;
     }
 
-    &__image {
-        max-height: 513px;
+    &__image-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 513px;
+        width: 342px;
     }
 }
 

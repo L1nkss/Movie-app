@@ -3,7 +3,8 @@ import { Dispatch } from "redux";
 import { IRootState } from "@redux/reducers/types/types";
 import { getGenresRequest } from "@redux/reducers/genres/actions/actions";
 import { GenreActionTypes } from "@redux/reducers/genres/types/types";
-import { TFilmsRequest } from "@redux/reducers/films/types/types";
+// import { TFilmsRequest } from "@redux/reducers/films/types/types";
+import { TFilmsRequest } from "@redux/reducers/films/actions/types/types";
 import AsideMenu from "./aside-menu";
 
 const mapStateToProps = (state: IRootState) => ({

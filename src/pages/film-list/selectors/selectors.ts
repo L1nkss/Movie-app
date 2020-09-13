@@ -14,11 +14,11 @@ const getFilteredFilms = createSelector(
 
 const getActiveGenre = createSelector(
   (state: IRootState) => { return [...state.genre.filmGenres, ...state.genre.genres]; },
-  (state: IRootState) => { return state.genre.active},
+  (state: IRootState) => { return state.genre.active; },
   (genres, active: string): number | string => {
     const idx = genres.findIndex((genre) => genre.label === active);
     return genres[idx].id ? genres[idx].id : genres[idx].label;
   },
 );
 
-export {getFilteredFilms, getActiveGenre};
+export { getFilteredFilms, getActiveGenre };

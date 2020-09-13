@@ -16,8 +16,6 @@ export default class FilmAdapter {
       originalLanguage: value.original_language,
       voteAverage: value.vote_average,
       releaseDate: value.release_date,
-      mediaType: value.media_type,
-      firstAirDate: value.first_air_date,
     };
   }
 }

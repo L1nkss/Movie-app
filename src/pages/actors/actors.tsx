@@ -1,13 +1,16 @@
 import Cast from "@components/cast/cast";
-// import { TCast } from "@constants/types";
 import Spinner from "@components/spinner/spinner";
 import { useEffect, useState } from "react";
+import TMatch from "@constants/types";
 import Service from "../../api/api";
 import CastAdapter from "../../utils/adapters/cast";
 import history from "../../utils/history";
 
-// todo исправить
-const Actors: React.FC<any> = (props: any): JSX.Element => {
+interface IActorsProps {
+  match: TMatch
+}
+
+const Actors: React.FC<IActorsProps> = (props: IActorsProps): JSX.Element => {
   const { id } = props.match.params;
   const [isCastLoading, setLoading] = useState(false);
   const [cast, setCast] = useState([]);

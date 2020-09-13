@@ -1,7 +1,7 @@
 import { put, call, takeEvery } from "redux-saga/effects";
 import ActionType from "@redux/reducers/films/constants/constants";
 import {
-  getFilmsSuccess, getFilmsError, getCurrentPage, getMoreFilmsSuccess, getFilmDetailsSuccess, getFilmDetailsError,
+  getFilmsSuccess, getFilmsError, setCurrentPage, getMoreFilmsSuccess, getFilmDetailsSuccess, getFilmDetailsError,
 } from "@redux/reducers/films/actions/actions";
 import Service from "../../../../api/api";
 
@@ -20,7 +20,7 @@ function* filmsMoreSaga({ payload }: any) {
       ? yield call(Service.getFilms, payload.type, payload.page)
       : yield call(Service.discover, { with_genres: payload.type, page: payload.page });
 
-    yield put(getCurrentPage(response.data.page));
+    yield put(setCurrentPage(response.data.page));
     yield put(getMoreFilmsSuccess(response.data.results));
   } catch (e) {
     yield put(getFilmsError());
@@ -31,7 +31,7 @@ function* filmsSaga(params: TParams) {
   try {
     const { type } = params.payload;
     const response = typeof type === "string" ? yield call(Service.getFilms, type) : yield call(Service.discover, { with_genres: type });
-    yield put(getCurrentPage(response.data.page));
+    yield put(setCurrentPage(response.data.page));
     yield put(getFilmsSuccess(response.data.results, response.data.total_pages));
   } catch (e) {
     yield put(getFilmsError());

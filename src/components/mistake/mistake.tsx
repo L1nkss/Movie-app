@@ -1,4 +1,4 @@
-const Mistake: React.FC = () => {
+const Mistake: React.FC = (): JSX.Element => {
   return (
     <div className="error">
       <div className="error__wrapper">

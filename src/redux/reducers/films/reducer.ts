@@ -36,7 +36,7 @@ const reducer: Reducer<IFilmsState> = (state = initialState, action): IFilmsStat
     case ActionType.GET_TOTAL_FILMS_PAGES:
       return { ...state, totalPages: action.payload };
 
-    case ActionType.GET_LOADED_PAGE:
+    case ActionType.SET_CURRENT_PAGE:
       return { ...state, currentPage: action.payload };
 
     case ActionType.GET_FILM_ERROR:

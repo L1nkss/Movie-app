@@ -6,6 +6,7 @@ import FilmList from "@components/../pages/film-list/film-list.connect";
 import FilmDetails from "@pages/film-details/film-details.connect";
 import Actors from "@pages/actors/actors";
 import Actor from "@pages/actor/actor";
+import NotFound from "@components/not-found/not-found";
 
 const Routes: React.FC = () => {
   return (
@@ -17,7 +18,7 @@ const Routes: React.FC = () => {
       <Route path={RoutePathes.ROOT} exact>
         <Redirect to={RoutePathes.MOVIES} />
       </Route>
-      <Route path={RoutePathes.NOT_FOUND} />
+      <Route component={NotFound} />
     </Switch>
   );
 };

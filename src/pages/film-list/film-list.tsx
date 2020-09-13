@@ -24,13 +24,12 @@ const FilmList: React.FC<IFilmListProps> = (props: IFilmListProps): JSX.Element 
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && !props.loadingMoreFilms) {
       if (props.currentPage <= props.totalPage) {
         const nextPage = props.currentPage + 1;
-        // setIsFetching(true);
         props.loadMoreFilms(props.currentGenre, nextPage);
       }
     }
   };
 
-  // Костыль, чтобы обновлять слушатель на скролле. todo исправить
+  // Костыль, чтобы обновлять слушатель на скролле
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
 

@@ -2,7 +2,6 @@ import { TFilmDetailServer } from "@redux/reducers/films/types/types";
 import genreAdapter from "@redux/reducers/genres/utils/adapter";
 
 export default class FilmDetailsAdapter {
-
   static changeValuesToFilmDetails(value: TFilmDetailServer) {
     return {
       id: value.id,

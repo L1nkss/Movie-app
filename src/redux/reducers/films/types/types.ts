@@ -1,14 +1,4 @@
-import ActionType from "@redux/reducers/films/constants/constants";
 import { TGenre } from "@redux/reducers/genres/types/types";
-
-type TFilmRequest = {
-  type: string | number
-};
-
-type TFilmsSuccessPayload = {
-  data: Array<TFilm>,
-  totalPages: number
-};
 
 type TFilmDetailsState = {
   loading: boolean,
@@ -16,34 +6,15 @@ type TFilmDetailsState = {
   details: null | TFilmDetails,
 };
 
-// Экшены
-export type TFilmsRequest = {
-  type: typeof ActionType.GET_FILMS_REQUEST,
-  payload?: TFilmRequest
-};
-
-export type TFilmsSuccess = {
-  type: typeof ActionType.GET_FILM_SUCCESS,
-  // payload: Array<TFilm>
-  payload: TFilmsSuccessPayload
-};
-
-export type TFilmsError = {
-  type: typeof ActionType.GET_FILM_ERROR,
-  payload?: void
-};
-
 type TFilm = {
   id: number,
   adult: boolean,
   posterPath: string,
-  genreIds: Array<number>,
+  genreIds?: Array<number>,
   title: string,
   voteAverage: number,
   overview: string,
-  releaseDate: string | undefined,
-  mediaType: string | undefined,
-  firstAirDate: string | undefined,
+  releaseDate?: string | undefined,
 };
 
 type TFilmDetails = TFilm & {
@@ -64,8 +35,6 @@ type TServerFilm = {
   original_language: string,
   vote_average: number,
   release_date: string
-  media_type?: string,
-  first_air_date?: string
 };
 
 type TFilmDetailServer = TServerFilm & {

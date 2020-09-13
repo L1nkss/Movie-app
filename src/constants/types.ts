@@ -1,18 +1,18 @@
-import * as H from "history";
+// import * as H from "history";
 
-export interface RouteComponentProps<P> {
-  match: match<P>;
-  location: H.Location;
-  history: H.History;
-  staticContext?: any;
-}
-
-export interface match<P> {
-  params: P;
-  isExact: boolean,
-  patch: string;
-  url: string
-}
+// export interface RouteComponentProps<P> {
+//   match: match<P>;
+//   location: H.Location;
+//   history: H.History;
+//   staticContext?: any;
+// }
+//
+// export interface match<P> {
+//   params: P;
+//   isExact: boolean,
+//   patch: string;
+//   url: string
+// }
 
 type TParams = {
   id: number

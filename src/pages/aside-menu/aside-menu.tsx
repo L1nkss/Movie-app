@@ -10,7 +10,6 @@ interface IAsideMenuProps {
   loadGenres: () => void
 }
 
-// Todo испраавить
 const AsideMenu: React.FC<IAsideMenuProps> = (props: IAsideMenuProps): JSX.Element => {
   useEffect(() => {
     props.loadGenres();
