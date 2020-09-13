@@ -21,19 +21,12 @@ class Api {
 
     this.getGenres = this.getGenres.bind(this);
     this.getFilms = this.getFilms.bind(this);
-    this.discoverMovieByGenre = this.discoverMovieByGenre.bind(this);
     this.getFilmDetails = this.getFilmDetails.bind(this);
     this.getRecommendations = this.getRecommendations.bind(this);
     this.getFilmCast = this.getFilmCast.bind(this);
     this.getPersonDetails = this.getPersonDetails.bind(this);
     this.discover = this.discover.bind(this);
-    // this.getCombine = this.getCombine.bind(this);
   }
-
-  // Общие запросы
-  // getCombine(id: number) {
-  //   return this.api.get(`person/${id}/combined_credits`, { params: { api_key: this.token } });
-  // }
 
   // Жанры
   getGenres() {
@@ -42,12 +35,7 @@ class Api {
 
   // Запросы по фильмам
   getFilms(type: string, page = 1) {
-    console.log("Вызываем фильм");
     return this.api.get(`movie/${type}`, { params: { api_key: this.token, language: "en-US", page } });
-  }
-
-  discoverMovieByGenre(id: number) {
-    return this.api.get("discover/movie", { params: { api_key: this.token, with_genres: id } });
   }
 
   // Запросы по детальной информации о фильме
@@ -69,7 +57,6 @@ class Api {
   }
 
   discover(params: any) {
-    console.log("Изучаем фильм");
     return this.api.get("discover/movie", { params: { api_key: this.token, ...params } });
   }
 }

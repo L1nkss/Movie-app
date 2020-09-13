@@ -1,5 +1,5 @@
 import { TFilm } from "@redux/reducers/films/types/types";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Spinner from "@components/spinner/spinner";
 import Mistake from "@components/mistake/mistake";
 import Header from "@components/header/header.connect";
@@ -19,7 +19,6 @@ interface IFilmListProps {
 
 const FilmList: React.FC<IFilmListProps> = (props: IFilmListProps): JSX.Element => {
   const { loading, error } = props;
-  // const [isFetching, setIsFetching] = useState(false);
 
   const handleScroll = () => {
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && !props.loadingMoreFilms) {
@@ -34,7 +33,6 @@ const FilmList: React.FC<IFilmListProps> = (props: IFilmListProps): JSX.Element 
   // Костыль, чтобы обновлять слушатель на скролле. todo исправить
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
-    // setIsFetching(false);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);

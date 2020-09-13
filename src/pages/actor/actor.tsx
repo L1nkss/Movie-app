@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { TFilm } from "@redux/reducers/films/types/types";
 import createFilmCards from "@pages/film-list/utils/utils";
 import moment from "moment";
-import ContentPlaceholder from "@components/content-placeholder/content-placeholder";
 import FilmAdapter from "../../utils/adapters/film";
 import Service from "../../api/api";
 import ActorAdapter from "../../utils/adapters/actor";
@@ -93,7 +92,6 @@ const Actor: React.FC<any> = (props: any): JSX.Element => {
         <div>
           <h2>Фильмография: </h2>
           <div className="film-list film-list--small">
-            {!isFilmLoaded && <ContentPlaceholder count={3} />}
             {isFilmLoaded && createFilmCards(details.films)}
           </div>
         </div>
