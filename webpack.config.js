@@ -12,9 +12,7 @@ module.exports = {
     new webpack.ProvidePlugin({
       React: "react",
     }),
-    new Dotenv({
-      path: "./.env",
-    }),
+    new Dotenv(),
   ],
   devtool: "source-map",
   devServer: {
