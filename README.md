@@ -1,8 +1,5 @@
 # Movie App
 
-### В процессе работы
-
-
 #### Технологии:
 - React
 - Typescript
